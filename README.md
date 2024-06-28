@@ -1,10 +1,6 @@
-<span style="color:rgb(62,21,134)">
-
 # **Disaster Geoinformatics Laboratory**
 
-</span>
-
-Welcome to the Disaster Geoinformatics Laboratory! 
+Welcome to the Disaster Geoinformatics Laboratory!  
 
  Using modern computing power, we develop a new framework to search and detect the impact of disasters by integrating real-time computing, damage/loss estimation models, remote sensing, and geo-informatics. The most important mission of our laboratory is to enhance the capabilities of disaster response/relief efforts and humanitarian activities by providing our research outcomes with particular regard to searching and mapping the areas and impacts of disasters.
 
@@ -37,10 +33,10 @@ Our mission is to:
 ## **Staff Members**
 
 - Shunichi Koshimura, Professor
-- Motoyuki Sato, Professor (Concurrent)
 - Erick Mas, Associate Professor
 - Bruno Adriano, Associate Professor
 - Yusaku Ohta, Associate Professor (Concurrent)
+- Ayumu Mizutani, Assistant Professor
 - Takashi Abe, Researcher
 - Miki Tohnoe, Administrative Staff
 - Yoichi Murashima, Visiting Professor
