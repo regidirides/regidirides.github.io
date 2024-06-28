@@ -1,0 +1,95 @@
+
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>災害解析 | 東北大学災害科学国際研究所　広域被害把握研究分野</title>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<link href="css/style.css" rel="stylesheet" media="all">
+</head>
+<body>
+<div id="container">
+  <header id="header">
+    <h1>東北大学災害科学国際研究所　広域被害把握研究分野</h1>
+  </header>
+  <div id="nav_frame">
+    <nav>
+     <ul id="nav1">
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../events-jp.html">災害解析</a></li>
+        <li><a href="../research-jp.html">研究紹介</a></li>
+        <li><a href="../members-jp.html">メンバー</a></li>
+        <li><a href="http://www.regid.irides.tohoku.ac.jp/events/index.html" target="_blank">SARS <br>(自動システム)</a></li>
+        <li><a href="../publications-jp.html">研究成果</a></li>
+        <li><a href="../access-jp.html">アクセス</a></li>
+        <li><a href="20160901_typhoon_10-en.html">ENGLISH</a></li>
+	  </ul>
+    </nav>
+        <div id="link">
+      <p>LINKS</p>
+      <ul id="nav2">
+        <li><a href="http://irides.tohoku.ac.jp" target="_blank"><small>災害科学国際研究所</small></a></li>
+        <li><a href="http:/www.civil.tohoku.ac.jp" target="_blank"><small>工学研究科 土木工学専攻</small></a></li>
+        <li><a href="http://www.aob.gp.tohoku.ac.jp" target="_blank"><small>地震・噴火予知研究観測センター</small></a></li>
+        <li><a href="http://www.cc.tohoku.ac.jp" target="_blank"><small>サイバーサイエンスセンター</small></a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="main">
+    <h1>平成28年台風10号における広域被害把握</h1>
+    <h2 class="mt0">リモートセンシングによる広域被害把握</h2>
+    <h3>JAXA ALOS-2データの解析</h3>
+    <p>2016年8月19日に発生した台風10号は，南西に進んだ後に停滞，その後北東に進み，8月30日に東北地方に上陸しました．
+    この台風に伴う豪雨により，岩手県や北海道で多くの被害が発生しています. 主にJAXA ALOS-2の画像の変化抽出法による浸水抽出活動を行いました．</p>
+ <!--- ここから結果のコンテンツ --->
+    <h2>解析結果</h2>
+	 <p>結果は暫定的なものです．逐次アップデートしていきます．</p>
+	   <table>
+		   <caption>使用したデータの諸元</caption>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Acquisition date</th>
+        <th>Beam Mode</th>
+		<th>Orbit</th>
+      </tr>
+ <!--     <tr>
+        <th>Pre-event</th>
+        <td>Acquisition date</td>
+        <td>Beam Mode</td>
+		<td>Orbit</td>
+      </tr>
+-->
+      <tr>
+        <th>Post-event</th>
+        <td>2016年9月1日</td>
+        <td>Strip Map (SM1), HH-polarization</td>
+		<td>Descending</td>
+      </tr>
+    </table>
+	
+    <p>JAXA ALOS2 PALSAR-2の台風10号によって大きな被害を受けた，岩手県下関伊郡岩泉町の浸水域抽出を試みた(被災後SAR画像のみを用いて)．
+    被災後SAR画像とGoogle Earthのみから教師データを作成し，最尤法を用いて画像分類を行った．またDEMを用いて，標高20m以上のエリアを誤抽出として除外した．
+    国土地理院の浸水マップ(写真判読)と比較した結果，概ね良好な結果が得られた．しかし浸水域と河川・裸地・冠水した田園が似た後方散乱を示すため，それらの区別は困難であった．
+    水域と陸域の教師データから閾値を算出し，水域抽出を行った．国土地理院の浸水マップと比較した結果，概ね良好な抽出結果が得られたが，河川をマスクする必要がある．</p>
+	    <ul>
+        <li> 最新解析結果 (2016.09.19) (PDF)  <a href="./report/Report0160919_en.pdf">LINK</a></li>
+        </ul>
+    <figure class="center"><img src="image/typhoon10_2016.jpg" width="500" height="310" alt="">
+      <figcaption>台風後の撮像データ</figcaption>
+    </figure>
+    <h2>その他</h2>
+     <ul>
+     <li>災害科学国際研究所 <a href="http://irides.tohoku.ac.jp/topics_disaster/2016kumamoto-eq.html">LINK</a></li>
+     </ul>
+  </div>
+</div>
+ <!--- ここまで --->
+<footer>
+  <div id="footer_color">
+    <div id="copy">Copyright &copy; ReGiD All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>
