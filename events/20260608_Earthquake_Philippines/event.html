@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tsunami Simulation for M7.4 Earthquake off Sanriku</title>
+  <meta name="description"
+    content="Sample disaster-response event page demonstrating the layout. Replace with a real event.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="../../assets/css/style.css" rel="stylesheet">
+</head>
+
+<body data-page="events" data-base="../../">
+
+  <div id="site-header"></div>
+
+  <div class="page-header">
+    <div class="container">
+      <a class="event-back" href="../../events-en.html">&larr; Recent Events</a>
+      <h1 class="fw-bold mb-2">Tsunami Simulation for M7.8 Earthquake off Mindanao</h1>
+      <div class="event-meta">
+        <span class="event-date">2026.06.08</span>
+        <!-- <span class="event-loc">Region, Country</span> -->
+      </div>
+    </div>
+  </div>
+
+  <section class="section content">
+    <div class="container event-article">
+
+      <h2 class="h4 fw-bold">Overview</h2>
+      <p class="text-secondary">We have simulated the tsunami generated from the earhtquake in the Mindanao region
+        (5.592°N, 125.047°E, depth = 55.2 km, M = 7.8 at 23:37:41 UTC according to <a
+          href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000srb1/executive" target="_blank"
+          rel="noopener">USGS</a>) on Jun. 7, 2026. The tsunami source model is computed using the <a
+          href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000srb1/finite-fault" target="_blank"
+          rel="noopener">USGS finite fault model</a>
+        (Figure 1).</p>
+
+      <p class="text-secondary">
+        For the initial tsunami condition, static seafloor deformation is computed for a rectangular fault model (Okada,
+        1985) using the source models. The bathymetry data used are the 15-arc-second grid data from <a
+          href="https://www.gebco.net" target="_blank" rel="noopener">GEBCO 2025</a>,
+        which were resampled to a 9-arc-second grid. To simulate tsunami propagation, the linear shallow-water
+        (long-wave) equations were solved numerically using a finite-difference method (<a
+          href="https://link.springer.com/article/10.1007/s00024-017-1760-2" target="_blank" rel="noopener">Adriano et
+          at.,
+          2018</a>)</p>
+
+
+
+      <figure class="event-hero" style="--fig-scale: 1"><img src="sourcemodel.jpg" alt="">
+        <figcaption class="text-center"><strong>Figure 1.</strong> Tsunami Source Model according to <a
+            href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000srb1/finite-fault" target="_blank"
+            rel="noopener">USGS</a>. Left: Slip distribution model. Right: Initial tsunami displacement field.
+        </figcaption>
+      </figure>
+
+      <h2 class="h4 fw-bold mt-4">Analysis &amp; results</h2>
+      <p class="text-secondary">Figure 2 shows the maximum wave height distribution (tsunami energy) and the maximum
+        tsunami height distribution at the coast.</p>
+      <!-- The tsunami propagation is shown in the following <a -->
+      <!-- href="https://www.youtube.com/watch?v=8bNEuCebGgc" target="_blank" rel="noopener">link</a>.</p> -->
+
+      <figure><img src="hzmax.jpg" alt="">
+        <figcaption class="text-center"><strong>Figure 2.</strong> Maximum wave height distribution.</figcaption>
+      </figure>
+
+      <p class="event-byline">by <a href="https://brunoadriano.com/" target="_blank" rel="noopener">B. Adriano</a>
+        and <a href="https://researchmap.jp/koshimura" target="_blank" rel="noopener">S. Koshimura</a></p>
+
+      <h2 class="h4 fw-bold mt-4">References</h2>
+      <ul class="text-secondary">
+        <li><a href="https://doi.org/10.1785/BSSA0750041135" target="_blank" rel="noopener">
+            Okada (1985)</a>, Surface Deformation Due to Shear and Tensile Faults in a Half-Space,
+          Bull. Seismol. Soc. Am., 75, 1135-1154.</li>
+        <li><a href="https://link.springer.com/article/10.1007/s00024-017-1760-2" target="_blank" rel="noopener">
+            Adriano et al. (2018)</a>, Tsunami Source Inversion Using Tide Gauge and DART Tsunami
+          Waveforms of the 2017 Mw8.2 Mexico Earthquake, Pure and Applied Geophysics, 175, 35–48.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/site.js"></script>
+</body>
+
+</html>

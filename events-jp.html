@@ -1,68 +1,40 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="utf-8">
-<title>災害解析 | 東北大学災害科学国際研究所　災害ジオインフォマティクス研究分野</title>
-<!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
-<![endif]-->
-<link href="css/style.css" rel="stylesheet" media="all">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>災害対応 — 災害ジオインフォマティクス研究分野（ReGiD）</title>
+  <meta name="description" content="東北大学 災害科学国際研究所（IRIDeS）災害ジオインフォマティクス研究分野（ReGiD）が大規模災害後に実施した災害対応活動の記録。">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body>
-<div id="container">
-  <header id="header">
-	<h1>災害ジオインフォマティクス研究分野</h1>
-  </header>
-  <div id="nav_frame">
-  <div id="logos">
-    <img src="image/irides.jpg" alt="" width="100" height="158">
-    </div>
-    <nav>
-      <ul id="nav1">
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="events-jp.html">災害解析</a></li>
-        <li><a href="research-jp.html">研究紹介</a></li>
-        <li><a href="members-jp.html">メンバー</a></li>
-        <li><a href="http://www.regid.irides.tohoku.ac.jp/events/index.html" target="_blank">SARS <br>(自動システム)</a></li>
-        <li><a href="publications-jp.html">研究成果</a></li>
-        <li><a href="access-jp.html">アクセス</a></li>
-        <li><a href="events-en.html">ENGLISH</a></li>
-      </ul>
-    </nav>
-    <div id="link">
-      <p>LINKS</p>
-      <ul id="nav2">
-        <li><a href="http://irides.tohoku.ac.jp" target="_blank"><small>災害科学国際研究所</small></a></li>
-        <li><a href="http:/www.civil.tohoku.ac.jp" target="_blank"><small>工学研究科 土木工学専攻</small></a></li>
-        <li><a href="http://www.aob.gp.tohoku.ac.jp" target="_blank"><small>地震・噴火予知研究観測センター</small></a></li>
-        <li><a href="http://www.cc.tohoku.ac.jp" target="_blank"><small>サイバーサイエンスセンター</small></a></li>
-      </ul>
+
+<body data-page="events">
+
+  <div id="site-header"></div>
+
+  <div class="page-header">
+    <div class="container">
+      <p class="eyebrow mb-1">災害対応</p>
+      <h1 class="fw-bold mb-2">災害対応</h1>
+      <p class="text-secondary mb-0 col-lg-8">
+        大規模災害の発生後、当研究室では迅速な被害把握・マッピングを実施しています。本ページではその対応活動を新しい順にまとめています（各ページの内容は英語です）。</p>
     </div>
   </div>
-  <div id="top"><img src="image/remotesensing.png" alt="" width="750" height="300"></div>
-  <div id="main">
-    <div id="about">
-      <h2 class="mt0">災害解析</h2>
-      <p>このページでは，国内外で発生した災害について，緊急的に解析を実施した結果を公開します．</p>
+
+  <section class="section">
+    <div class="container">
+      <div id="events-list" class="event-list"></div>
     </div>
-    <div id="news">
-      <h3 class="top">NEWS &amp; TOPICS</h3>
-      <ul>
-       <li>(2018.07.19) > 平成30年7月豪雨災害（西日本豪雨）<a href="./response/20180706_westjapanflood-jp.html"> LINK</a></li>
-       <li>(2017.09.08) > メキシコ地震に関する災害研の特設ページを開設しました<a href="./response/20170908_mexico_eq-jp.html"> LINK</a></li>
-       <li>(2017.07.21) > トルコ地震に関する災害研の特設ページを開設しました<a href="./response/20170720_turkey_eq-jp.html"> LINK</a></li>
-       <li>(2016.09.01) > 平成28年台風10号における広域被害把握<a href="./response/20160901_typhoon_10-jp.html"> LINK</a></li>
-       <li>(2016.04.19) > エクアドル地震に関する災害研の特設ページを開設しました <a href="./response/20160420_ecuador-eq-jp.html"> LINK</a></li>
-	   <li>(2016.04.14) > 熊本地震に関する災害研の特設ページを開設しました <a href="./response/20160414_kumamoto-eq-jp.html"> LINK</a></li>
-	　</ul>
-    </div>
-  </div>
-</div>
-<footer>
-  <div id="footer_color">
-    <div id="copy">Copyright &copy; ReGiD All rights reserved.</div>
-  </div>
-</footer>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/site-jp.js"></script>
+  <script src="assets/js/events.js"></script>
 </body>
+
 </html>
