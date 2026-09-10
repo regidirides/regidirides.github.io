@@ -9,6 +9,15 @@
 */
 (function () {
   var EVENTS = [
+        {    
+      date: "2026-07-28",
+      dateLabel: "2026.07.28",
+      title: "Analysis of the Impact of Disasters Through Media Coverage — Report One Month After the Kumamoto Earthquake —",
+      location: "Kumamoto, Japan",
+      thumb: "events/20260728_Kumamoto_EQ/titlepage_1month.png",
+      summary: "A local LLM turns news articles about the 2026 Kumamoto earthquake into geocoded, structured records and links them into causal chains, 83% of them mappable. Tracked over a month, this exposed late-surfacing secondary impacts: tourism losses, petty crime, and mounting strain on hospitals.",
+      page: "events/20260728_Kumamoto_EQ/event2.html",
+    },
     {    
       date: "2026-07-28",
       dateLabel: "2026.07.28",
