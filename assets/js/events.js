@@ -2,10 +2,13 @@
    Both events-en.html and events-jp.html render this same (English) list.
 
    To add a new event:
-     1. Copy event-template.html to event-<slug>.html and fill in the content.
-     2. Add an entry to the EVENTS array below (newest first is handled automatically).
-     3. Put that event's images in image/events/<slug>/ (optimise them first —
-        see tools/optimize-images.py).
+     1. Create a folder events/<YYYYMMDD_Slug>/ and copy an existing page into it as a
+        starting point (e.g. events/20260420_Tsunami_Iwate/event.html). Keep
+        <body data-page="events" data-base="../../"> so the shared header/footer load.
+     2. Put that event's images in the same folder (optimise them first —
+        see tools/optimize-images.py) and reference them by file name only.
+     3. Add an entry to the EVENTS array below (newest first is handled automatically);
+        "thumb" and "page" are paths from the site root, e.g. events/<YYYYMMDD_Slug>/event.html.
 */
 (function () {
   var EVENTS = [

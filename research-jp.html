@@ -1,225 +1,616 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>研究紹介 — 災害ジオインフォマティクス研究分野（ReGiD）</title>
-  <meta name="description" content="災害ジオインフォマティクス研究分野（ReGiD）の研究内容：実時間津波シミュレーション、被害推定、災害対応のためのリモートセンシング。">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
-</head>
-<body data-page="research">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #2c2c2b;
+        --muted: #707782;
+        --line: #e6e5e3;
+        --surface: #f8fafc;
+        --blue: #2783de;
+        --blue-soft: #e8f3fc;
+        --green: #46a171;
+        --green-soft: #e8f1ec;
+        --orange: #d5803b;
+        --orange-soft: #fbebde;
+        --purple: #7758a6;
+        --purple-soft: #f0eafa;
+      }
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #fff;
+      }
+      .page-header {
+        background: linear-gradient(135deg, #f6fbff 0%, #fff 62%, #f8fafc 100%);
+        border-bottom: 1px solid var(--line);
+        padding: 76px 0 64px;
+      }
+      .page-header .eyebrow,
+      .eyebrow {
+        color: var(--blue);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .page-header h1 {
+        font-size: clamp(2.4rem, 5vw, 4.35rem);
+        letter-spacing: -0.055em;
+      }
+      .page-header .lead {
+        max-width: 760px;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+      .section {
+        padding: 25px 0;
+      }
+      .section-tight {
+        padding: 48px 0;
+      }
+      .content {
+        line-height: 1.75;
+      }
+      .content h2 {
+        letter-spacing: -0.035em;
+      }
+      .content h3 {
+        letter-spacing: -0.025em;
+      }
+      .text-secondary {
+        color: var(--muted) !important;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .topic-grid.stream-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .topic-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .topic-card:hover {
+        transform: translateY(-3px);
+        border-color: #bcdcf6;
+        box-shadow: 0 8px 22px rgba(39, 131, 222, 0.1);
+      }
+      .topic-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+      }
+      .topic-card:nth-child(2) .topic-icon {
+        background: var(--orange-soft);
+        color: var(--orange);
+      }
+      .topic-card:nth-child(3) .topic-icon {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+      .topic-card:nth-child(4) .topic-icon {
+        background: var(--purple-soft);
+        color: var(--purple);
+      }
+      .topic-card h3 {
+        font-size: 1.08rem;
+        line-height: 1.35;
+      }
+      .topic-card p {
+        font-size: 0.91rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .topic-card .card-link {
+        margin-top: auto;
+        padding-top: 18px;
+        color: var(--blue);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .topic-card .card-link:hover {
+        text-decoration: underline;
+      }
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .feature-strip > div {
+        padding: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .feature-strip > div:last-child {
+        border-right: 0;
+      }
+      .feature-strip strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 5px;
+      }
+      .feature-strip span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .callout {
+        border-left: 4px solid var(--blue);
+        background: var(--blue-soft);
+        padding: 24px 26px;
+        border-radius: 0 12px 12px 0;
+      }
+      .callout.green {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+      .callout.orange {
+        border-color: var(--orange);
+        background: var(--orange-soft);
+      }
+      .callout.purple {
+        border-color: var(--purple);
+        background: var(--purple-soft);
+      }
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .research-tag,
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1f4f7;
+        color: #4f5965;
+        font-size: 0.76rem;
+        font-weight: 600;
+      }
+      .research-divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 60px 0;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .figure-card {
+        height: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .figure-card img {
+        width: 100%;
+        max-height: 310px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .figure-card figcaption {
+        padding: 13px 2px 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .figure-card.no-image {
+        padding: 26px;
+      }
+      .process {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        align-items: stretch;
+      }
+      .process-step {
+        position: relative;
+        padding: 24px 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        min-height: 150px;
+      }
+      .process-step:not(:last-child) {
+        border-right: 0;
+      }
+      .process-step:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+      .process-step:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+      .process-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 29px;
+        height: 29px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 800;
+      }
+      .process-step .num {
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        color: var(--blue);
+        font-weight: 800;
+      }
+      .process-step h3 {
+        font-size: 1rem;
+        margin: 12px 0 8px;
+      }
+      .process-step p {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .outcome {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .outcome h3 {
+        font-size: 1rem;
+      }
+      .outcome p,
+      .outcome li {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .outcome ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .metric {
+        padding: 22px;
+        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .metric strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--blue);
+        letter-spacing: -0.04em;
+      }
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+      .btn-lab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+        padding: 11px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--blue);
+        color: var(--blue);
+        background: #fff;
+      }
+      .btn-lab.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-lab:hover {
+        filter: brightness(0.96);
+        color: inherit;
+      }
+      .btn-lab.primary:hover {
+        color: #fff;
+      }
+      @media (max-width: 991px) {
+        .topic-grid,
+        .topic-grid.stream-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+        }
+        .feature-strip > div:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .process {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .process-step,
+        .process-step:not(:last-child) {
+          border: 1px solid var(--line);
+          border-radius: 12px;
+        }
+        .process-step:not(:last-child)::after {
+          content: "↓";
+          right: auto;
+          top: auto;
+          bottom: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .metric-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 575px) {
+        .page-header {
+          padding: 56px 0 46px;
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .topic-grid,
+        .topic-grid.stream-grid,
+        .outcome-grid {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip > div,
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .feature-strip > div:last-child {
+          border-bottom: 0;
+        }
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2.7rem;
+        }
+      }
+    </style>
 
-  <div id="site-header"></div>
+    <title>研究紹介 — 災害ジオインフォマティクス研究分野（ReGiD）</title>
+    <meta
+      name="description"
+      content="災害ジオインフォマティクス研究分野（ReGiD）の研究テーマ：津波シミュレーション、エージェントベースモデリング、リモートセンシング、災害デジタルツイン。"
+    />
+  </head>
+  <body data-page="research">
+    <div id="site-header"></div>
 
-  <div class="page-header">
-    <div class="container">
-      <p class="eyebrow mb-1">研究内容</p>
-      <h1 class="fw-bold mb-2">研究紹介</h1>
-      <p class="text-secondary mb-0 col-lg-8">実時間シミュレーションとリモートセンシングという2つの柱を軸に、刻々と進展する災害の影響を検知・推定・把握する研究に取り組んでいます。</p>
-    </div>
-  </div>
-
-  <section class="section content">
-    <div class="container">
-
-      <!-- 1 -->
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">リアルタイム津波浸水・被害推定</h3>
-          <p class="text-secondary">実時間の地震情報とスーパーコンピュータを活用し、産業界・大学と連携して、地震発生から約20分以内に津波被害を推定・配信する技術を開発しています。これを「10-10-10チャレンジ」と呼び、10分で津波波源を推定し、10分で10mメッシュの浸水計算を行います。本システムは、東北大学の地震・噴火予知研究観測センターおよびサイバーサイエンスセンター、ならびにNEC・国際航業株式会社との連携により開発され、ジャパン・レジリエンス・アワード2016（優秀賞）を受賞しました。</p>
-          <div class="research-tags">
-            <span class="research-tag">津波シミュレーション</span>
-            <span class="research-tag">浸水モデリング</span>
-            <span class="research-tag">実時間計算</span>
-            <span class="research-tag">被害把握</span>
-            <span class="research-tag">フラジリティ関数</span>
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow mb-2">研究内容</p>
+        <h1 class="fw-bold mb-3">研究紹介</h1>
+        <p class="lead text-secondary mb-4">
+          物理的なハザードシミュレーション、地球観測、人間行動、意思決定支援を結びつけ、災害の影響を理解するとともに、地域社会の備えと対応の向上を目指しています。
+        </p>
+        <!-- <div class="d-flex flex-wrap gap-2"><a class="btn-lab primary" href="abm-jp.html">エージェントベースモデリングを見る →</a><a class="btn-lab" href="ddt-jp.html">デジタルツインのテーマを見る</a></div> -->
+      </div>
+    </header>
+    <section class="section content">
+      <div class="container">
+        <!-- <div class="feature-strip mb-5">
+    <div><strong>ハザード</strong><span>津波、地震、洪水、連鎖的な影響。</span></div>
+    <div><strong>人々</strong><span>避難、移動、意思決定、相互作用。</span></div>
+    <div><strong>手法</strong><span>AI、機械学習、深層学習、大規模言語モデル、GIS、データ融合、科学技術計算。</span></div>
+    <div><strong>意思決定</strong><span>シナリオ、避難誘導、災害デジタルツイン。</span></div>
+  </div> -->
+        <div class="row g-4 align-items-end mb-4">
+          <div class="col-lg-8">
+            <p class="kicker mb-2">研究の構成</p>
+            <h2 class="fw-bold mb-2">相互につながる研究の流れ</h2>
+            <p class="text-secondary mb-0">
+              私たちの研究は、相互に関連するテーマ（津波予測、エージェントベースモデリング、地球観測、災害デジタルツイン）にまたがっています。研究課題に応じて、AI、機械学習、深層学習、強化学習、大規模言語モデル、科学技術計算、データ融合を活用しています。
+            </p>
           </div>
         </div>
-        <div class="col-lg-6">
-          <figure><img src="image/sx-ace.png" alt="スーパーコンピュータSX-ACEによるリアルタイム津波浸水・被害予測">
-            <figcaption>東北大学のスーパーコンピュータSX-ACEを用いたリアルタイム津波浸水・被害予測。</figcaption>
-          </figure>
+        <div class="topic-grid stream-grid">
+          <article class="topic-card">
+            <div class="topic-icon">津波</div>
+            <h3>HPCによるリアルタイム津波予測</h3>
+            <p>
+              高速な物理シミュレーション、浸水予測、不確実性の探索、被害推定により、津波科学と緊急時の意思決定を支援します。
+            </p>
+            <div class="pill-list mb-3">
+              <span class="pill">津波</span><span class="pill">HPC</span
+              ><span class="pill">予測</span>
+            </div>
+            <a class="card-link" href="tsunami-jp.html"
+              >津波予測の研究を見る →</a
+            >
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">ABM</div>
+            <h3>
+              エージェントベースモデリング・人流・LLMを用いた分析
+            </h3>
+            <p>
+              人々や集団の移動、意思決定、相互作用を表現し、避難行動、混雑、避難誘導、計画を研究します。
+            </p>
+            <div class="pill-list mb-3">
+              <span class="pill">強化学習</span
+              ><span class="pill">人流</span
+              ><span class="pill">LLM</span>
+            </div>
+            <a class="card-link" href="abm-jp.html">ABM研究を見る →</a>
+          </article>
+          <article class="topic-card">
+            <div class="topic-icon">EO</div>
+            <h3>地球観測・データ融合・物理制約付きAI</h3>
+            <p>
+              衛星観測、物理的知見、地理空間データを組み合わせ、被害を把握し、災害対応を支援します。
+            </p>
+            <div class="pill-list mb-3">
+              <span class="pill">地球観測</span
+              ><span class="pill">データ融合</span><span class="pill">AI</span>
+            </div>
+            <a class="card-link" href="rs-jp.html"
+              >地球観測の研究を見る →</a
+            >
+          </article>
+        </div>
+        <div class="callout purple mt-4">
+          <strong>統合レイヤー：災害デジタルツイン</strong>
+          <p class="text-secondary mb-2 mt-2">
+            デジタルツインは、ハザード、インフラ、人々、観測、意思決定を共通の表現で結びつけ、これらの研究の流れを統合します。
+          </p>
+          <a class="card-link" href="ddt-jp.html"
+            >デジタルツインの枠組みを見る →</a
+          >
         </div>
       </div>
+    </section>
 
-      <hr class="research-divider">
-
-      <!-- 2 -->
-      <div class="row align-items-center g-4 flex-lg-row-reverse">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">地震・津波減災のためのビッグデータ解析（JST CREST）</h3>
-          <p class="text-secondary">2015年にJST CRESTに採択された本プロジェクトでは、災害シミュレーション、災害管理科学、数理科学、情報科学を結集しています。大規模・高分解能の数値シミュレーションと実時間のデータ同化を通じて、世界に先駆けた災害減災のためのビッグデータ解析基盤を構築し、最悪シナリオを回避するための対策を実時間で提示することで、国や自治体の意思決定を支援します。</p>
-          <div class="research-tags">
-            <span class="research-tag">データ融合</span>
-            <span class="research-tag">物理ベースモデリング</span>
-            <span class="research-tag">データ同化</span>
-            <span class="research-tag">災害シナリオ</span>
+    <section class="section-tight">
+      <div class="container">
+        <div class="callout">
+          <p class="kicker mb-2">私たちの特色</p>
+          <h2 class="h3 fw-bold mb-2">
+            ハザードの観測から人々の対応まで
+          </h2>
+          <p class="text-secondary mb-0">
+            衛星画像は被害がどこで発生したかを示し、物理モデルは水がどこまで到達しうるかを推定し、エージェントベースモデルは人々がどのように対応するかを検証します。そしてデジタルツインは、これらのレイヤーを統合して計画と行動に役立てます。
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="section content">
+      <div class="container">
+        <p class="kicker mb-2">テーマ間のつながり</p>
+        <h2 class="fw-bold mb-4">再利用可能な研究ワークフロー</h2>
+        <div class="process">
+          <div class="process-step">
+            <span class="num">01</span>
+            <h3>観測・センシング</h3>
+            <p>リアルタイムセンサー、地球観測、人流データ</p>
+          </div>
+          <div class="process-step">
+            <span class="num">02</span>
+            <h3>シミュレーション・推定</h3>
+            <p>ハザード、影響・被害、避難と人々の行動。</p>
+          </div>
+          <!-- <div class="process-step"><span class="num">03</span><h3>表現</h3><p>エージェント、ネットワーク、建物、インフラ、組織。</p></div> -->
+          <div class="process-step">
+            <span class="num">03</span>
+            <h3>比較・探索</h3>
+            <p>
+              画像、経路、施策、避難誘導、ボトルネック、脆弱性。
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">04</span>
+            <h3>行動・意思決定</h3>
+            <p>
+              地図、報告書、訓練、計画支援、リアルタイムの意思決定。
+            </p>
           </div>
         </div>
-        <div class="col-lg-6">
-          <figure><img src="image/crest.png" alt="災害シミュレーションのシナリオ爆発の制御">
-            <figcaption>大規模災害シミュレーションにおける「シナリオ爆発」の制御。</figcaption>
-          </figure>
-        </div>
       </div>
-
-      <hr class="research-divider">
-
-      <!-- 3 -->
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">大規模災害に対する都市レジリエンスの向上（日本・イスラエル）</h3>
-          <p class="text-secondary">エルサレム・ヘブライ大学との連携により、大規模災害の被害評価・対応計画・減災のためのシミュレーション基盤を構築します。日本側はシミュレーションとリモートセンシングによる短期被害評価を担当し、イスラエル側はGIS上に統合した詳細な土地利用モデルとエージェントベースモデルを開発します。両者の協働により、これまでにない時空間的詳細さをもつ統合的な災害管理ツールを実現します。</p>
-          <div class="research-tags">
-            <span class="research-tag">エージェントベースモデル</span>
-            <span class="research-tag">GIS</span>
-            <span class="research-tag">被害把握</span>
-            <span class="research-tag">災害シナリオ</span>
+    </section>
+    <section class="section-tight">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <p class="kicker mb-2">研究の方針</p>
+            <h2 class="h3 fw-bold">論文の先まで役立つ研究</h2>
+          </div>
+          <div class="col-lg-8">
+            <div class="outcome-grid">
+              <div class="outcome">
+                <h3>研究水準</h3>
+                <p>
+                  モデルは、前提条件と限界を明示したうえで検証・比較・文書化されます。
+                </p>
+              </div>
+              <div class="outcome">
+                <h3>実務志向</h3>
+                <p>
+                  成果は、タイミング、ボトルネック、曝露、対策といった計画上の問いに応えるよう設計されています。
+                </p>
+              </div>
+              <div class="outcome">
+                <h3>再利用性</h3>
+                <p>
+                  オープンなワークフロー、事例研究、マニュアル、ソフトウェアにより、他の研究者や実務者が成果を応用できるようにします。
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <figure><img src="image/jst-most-en.png" alt="エルサレム・ヘブライ大学との連携スキーム">
-            <figcaption>イスラエル・エルサレム・ヘブライ大学との連携スキーム。</figcaption>
-          </figure>
-        </div>
       </div>
+    </section>
 
-      <hr class="research-divider">
+    <div id="site-footer"></div>
 
-      <!-- 4 -->
-      <div class="row align-items-center g-4 flex-lg-row-reverse">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">シミュレーションとリモートセンシングによる南米の津波予測</h3>
-          <p class="text-secondary">中南米の巨大地震は、日本を含む環太平洋諸国に影響を及ぼす津波災害を引き起こしてきました。津波リスクの高いラテンアメリカ諸国のレジリエンス向上のため、実時間計算とリモートセンシングを組み合わせ、被害の全体像を把握します。近地津波と遠地津波の影響を分けて評価し、実時間津波シミュレーションとフラジリティ関数を用いたGISベースの建物被害推定システムを開発しました。</p>
-          <div class="research-tags">
-            <span class="research-tag">波源推定</span>
-            <span class="research-tag">津波シミュレーション</span>
-            <span class="research-tag">SAR迅速評価</span>
-            <span class="research-tag">フラジリティ関数</span>
-            <span class="research-tag">被害把握</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <figure><img src="image/latinamerica.png" alt="南米諸国の広域被害把握">
-            <figcaption>実時間津波シミュレーションとリモートセンシングを組み合わせた南米諸国の広域被害把握。</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <hr class="research-divider">
-
-      <!-- 5 -->
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">建物被害を再現する津波シミュレーション</h3>
-          <p class="text-secondary">将来の津波被害をより正確に予測するには、構造物が流れの障害となる密集市街地での津波の挙動を理解する必要があります。私たちは、津波が市街地に浸水する過程で建物が流失していく様子を再現する手法（時間発展型合成等価粗度モデル）を構築し、どの建物が、いつ、何棟流失するかを推定します。仙台平野（名取川河口部）に適用したところ、2011年東北津波の建物被害を再現し、当時の空中写真と一致する結果が得られました。</p>
-          <div class="research-tags">
-            <span class="research-tag">津波シミュレーション</span>
-            <span class="research-tag">浸水モデリング</span>
-            <span class="research-tag">物理ベースモデリング</span>
-            <span class="research-tag">フラジリティ関数</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <figure><img src="image/damageestimation.png" alt="流失建物分布の観測値と推定値の比較">
-            <figcaption>左：国土交通省の現地調査（2011年）による流失建物分布。右：時間発展型合成等価粗度モデルによる推定被害。</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <hr class="research-divider">
-
-      <!-- 6 -->
-      <div class="row align-items-center g-4 flex-lg-row-reverse">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">格子ボルツマン法による次世代津波シミュレーション</h3>
-          <p class="text-secondary">津波シミュレーションは計算機性能の向上とともに急速に発展し、現在では津波高さを約10%の誤差で再現できます。市街地への津波遡上の再現には、従来は計算負荷の大きい3次元CFDモデルが必要でした。大規模並列計算に適した完全陽的スキームである格子ボルツマン法に基づく津波シミュレーションを開発することで、現状の計算速度の限界を超え、次世代の津波シミュレーション技術の構築を目指します。</p>
-          <div class="research-tags">
-            <span class="research-tag">津波シミュレーション</span>
-            <span class="research-tag">浸水モデリング</span>
-            <span class="research-tag">物理ベースモデリング</span>
-            <span class="research-tag">HPC</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <figure><img src="image/lbm.png" alt="格子ボルツマン法による津波浸水シミュレーション">
-            <figcaption>格子ボルツマン法による津波浸水シミュレーション。</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <hr class="research-divider">
-
-      <!-- 7 -->
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">緊急地震速報を用いた最悪シナリオ津波の即時推定</h3>
-          <p class="text-secondary">地震発生直後に得られる緊急地震速報を用いて、最悪シナリオの津波を推定し、迅速な被害評価を支援します。2011年東北地方太平洋沖地震では、津波警報の過小評価が避難の遅れを招きました。多数の津波シナリオを設定し、初期条件の不確実性を考慮することで、約3分で最悪ケースに生じうる最大波高を平均約97%の精度で推定します。</p>
-          <div class="research-tags">
-            <span class="research-tag">波源推定</span>
-            <span class="research-tag">津波シミュレーション</span>
-            <span class="research-tag">災害シナリオ</span>
-            <span class="research-tag">緊急地震速報</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <figure><img src="image/eew_tsunami.png" alt="最悪シナリオ津波推定のための断層配置の例">
-            <figcaption>高い津波振幅を生むシナリオを特定するため、波源の向きなどのパラメータを変化させた断層配置の例。</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <hr class="research-divider">
-
-      <!-- 8 -->
-      <div class="row align-items-center g-4 flex-lg-row-reverse">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">偏波SARによる地震建物被害把握</h3>
-          <p class="text-secondary">本研究では、地震後に取得した単一の二偏波ALOS-2/PALSAR-2画像から、地震による建物被害を評価します。本データは、軽微な被害・倒壊・傾斜の建物を識別するのに適しています。被害レベルの異なる市街地に機械学習アルゴリズムを適用し、2015年ネパール地震後のカトマンズ地区で建物被害を良好に検出しました。</p>
-          <div class="research-tags">
-            <span class="research-tag">建物被害把握</span>
-            <span class="research-tag">ALOS-2/PALSAR-2</span>
-            <span class="research-tag">ディープラーニング</span>
-            <span class="research-tag">SAR迅速評価</span>
-            <span class="research-tag">変化抽出</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <figure><img src="image/sar_nepal.png" alt="ALOS-2/PALSAR-2による機械学習を用いた建物被害把握">
-            <figcaption>ALOS-2/PALSAR-2のSAR画像を用いた機械学習による建物被害把握。</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <hr class="research-divider">
-
-      <!-- 9 -->
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6">
-          <h3 class="h4 fw-bold">LバンドSARによる都市浸水域の抽出</h3>
-          <p class="text-secondary">本研究では、SAR画像を用いて都市環境内の浸水域を検出します。2015年9月の関東・東北豪雨を事例として解析を行いました。</p>
-          <div class="research-tags">
-            <span class="research-tag">浸水域把握</span>
-            <span class="research-tag">変化抽出</span>
-            <span class="research-tag">ALOS-2/PALSAR-2</span>
-            <span class="research-tag">SAR迅速評価</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <figure><img src="image/palsar.png" alt="越流地点付近の浸水域抽出結果">
-            <figcaption>越流地点付近の浸水域抽出結果（左：平均差分、右：相関係数）。</figcaption>
-          </figure>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div id="site-footer"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/site-jp.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site-jp.js"></script>
+  </body>
 </html>

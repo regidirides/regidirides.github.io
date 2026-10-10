@@ -14,6 +14,10 @@
 
   var current = document.body.getAttribute("data-page") || "home";
 
+  // Research sub-pages highlight the Research menu item.
+  var PARENT = { tsunami: "research", abm: "research", rs: "research", ddt: "research" };
+  var navCurrent = PARENT[current] || current;
+
   // Path prefix so the shared header/footer also work from pages in subfolders.
   // Root pages: leave unset. A page at events/<slug>/event.html sets data-base="../../".
   var base = document.body.getAttribute("data-base") || "";
@@ -22,11 +26,12 @@
   var JP = {
     home: "index-jp.html", members: "members-jp.html", research: "research-jp.html",
     publications: "publications-jp.html", events: "events-jp.html",
-    opportunities: "opportunities-jp.html", access: "access-jp.html"
+    opportunities: "opportunities-jp.html", access: "access-jp.html",
+    tsunami: "tsunami-jp.html", abm: "abm-jp.html", rs: "rs-jp.html", ddt: "ddt-jp.html"
   };
 
   var links = NAV.map(function (n) {
-    var active = n.id === current ? " active" : "";
+    var active = n.id === navCurrent ? " active" : "";
     return '<li class="nav-item"><a class="nav-link' + active + '" href="' + base + n.href + '">' + n.label + "</a></li>";
   }).join("");
 

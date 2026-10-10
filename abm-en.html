@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #2c2c2b;
+        --muted: #707782;
+        --line: #e6e5e3;
+        --surface: #f8fafc;
+        --blue: #2783de;
+        --blue-soft: #e8f3fc;
+        --green: #46a171;
+        --green-soft: #e8f1ec;
+        --orange: #d5803b;
+        --orange-soft: #fbebde;
+        --purple: #7758a6;
+        --purple-soft: #f0eafa;
+      }
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #fff;
+      }
+      .page-header {
+        background: linear-gradient(135deg, #f6fbff 0%, #fff 62%, #f8fafc 100%);
+        border-bottom: 1px solid var(--line);
+        padding: 76px 0 64px;
+      }
+      .page-header .eyebrow,
+      .eyebrow {
+        color: var(--blue);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .page-header h1 {
+        font-size: clamp(2.4rem, 5vw, 4.35rem);
+        letter-spacing: -0.055em;
+      }
+      .page-header .lead {
+        max-width: 760px;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+      .section {
+        padding: 25px 0;
+      }
+      .section-tight {
+        padding: 48px 0;
+      }
+      .content {
+        line-height: 1.75;
+      }
+      .content h2 {
+        letter-spacing: -0.035em;
+      }
+      .content h3 {
+        letter-spacing: -0.025em;
+      }
+      .text-secondary {
+        color: var(--muted) !important;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .topic-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .topic-card:hover {
+        transform: translateY(-3px);
+        border-color: #bcdcf6;
+        box-shadow: 0 8px 22px rgba(39, 131, 222, 0.1);
+      }
+      .topic-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+      }
+      .topic-card:nth-child(2) .topic-icon {
+        background: var(--orange-soft);
+        color: var(--orange);
+      }
+      .topic-card:nth-child(3) .topic-icon {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+      .topic-card:nth-child(4) .topic-icon {
+        background: var(--purple-soft);
+        color: var(--purple);
+      }
+      .topic-card h3 {
+        font-size: 1.08rem;
+        line-height: 1.35;
+      }
+      .topic-card p {
+        font-size: 0.91rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .topic-card .card-link {
+        margin-top: auto;
+        padding-top: 18px;
+        color: var(--blue);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .topic-card .card-link:hover {
+        text-decoration: underline;
+      }
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .feature-strip > div {
+        padding: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .feature-strip > div:last-child {
+        border-right: 0;
+      }
+      .feature-strip strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 5px;
+      }
+      .feature-strip span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .callout {
+        border-left: 4px solid var(--blue);
+        background: var(--blue-soft);
+        padding: 24px 26px;
+        border-radius: 0 12px 12px 0;
+      }
+      .callout.green {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+      .callout.orange {
+        border-color: var(--orange);
+        background: var(--orange-soft);
+      }
+      .callout.purple {
+        border-color: var(--purple);
+        background: var(--purple-soft);
+      }
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .research-tag,
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1f4f7;
+        color: #4f5965;
+        font-size: 0.76rem;
+        font-weight: 600;
+      }
+      .research-divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 60px 0;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .figure-card {
+        height: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .figure-card img {
+        width: 100%;
+        max-height: 310px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .figure-card figcaption {
+        padding: 13px 2px 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .figure-card.no-image {
+        padding: 26px;
+      }
+      .process {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        align-items: stretch;
+      }
+      .process-step {
+        position: relative;
+        padding: 24px 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        min-height: 150px;
+      }
+      .process-step:not(:last-child) {
+        border-right: 0;
+      }
+      .process-step:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+      .process-step:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+      .process-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 29px;
+        height: 29px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 800;
+      }
+      .process-step .num {
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        color: var(--blue);
+        font-weight: 800;
+      }
+      .process-step h3 {
+        font-size: 1rem;
+        margin: 12px 0 8px;
+      }
+      .process-step p {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .outcome {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .outcome h3 {
+        font-size: 1rem;
+      }
+      .outcome p,
+      .outcome li {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .outcome ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .metric {
+        padding: 22px;
+        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .metric strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--blue);
+        letter-spacing: -0.04em;
+      }
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+      .btn-lab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+        padding: 11px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--blue);
+        color: var(--blue);
+        background: #fff;
+      }
+      .btn-lab.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-lab:hover {
+        filter: brightness(0.96);
+        color: inherit;
+      }
+      .btn-lab.primary:hover {
+        color: #fff;
+      }
+      @media (max-width: 991px) {
+        .topic-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+        }
+        .feature-strip > div:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .process {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .process-step,
+        .process-step:not(:last-child) {
+          border: 1px solid var(--line);
+          border-radius: 12px;
+        }
+        .process-step:not(:last-child)::after {
+          content: "↓";
+          right: auto;
+          top: auto;
+          bottom: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .metric-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 575px) {
+        .page-header {
+          padding: 56px 0 46px;
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .topic-grid,
+        .outcome-grid {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip > div,
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .feature-strip > div:last-child {
+          border-bottom: 0;
+        }
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2.7rem;
+        }
+      }
+    </style>
+
+    <title>
+      Agent-Based Modeling, Human Mobility, and LLM-based Analysis — Disaster
+      Geoinformatics Lab. (ReGiD)
+    </title>
+    <meta
+      name="description"
+      content="Agent-based modeling for tsunami evacuation, human behavior, policy testing, and disaster Digital Twins at ReGiD."
+    />
+  </head>
+  <body data-page="abm">
+    <div id="site-header"></div>
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow mb-2">Research theme</p>
+        <h1 class="fw-bold mb-3">
+          Agent-Based Modeling, Human Mobility, and LLM-based Analysis
+        </h1>
+        <p class="lead text-secondary mb-4">
+          We use agent-based models to connect hazard conditions and urban
+          environments with the decisions, movements, and interactions that
+          shape disaster response (e.g., evacuation, resource allocation, and decision-making).
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn-lab primary" href="research-en.html"
+            >← Research overview</a
+          ><a class="btn-lab" href="https://github.com/erick2307/TUNAMI-EVAC"
+            >TUNAMI-EVAC on GitHub ↗</a
+          >
+          <a class="btn-lab" href="https://github.com/regidirides/gtem-model/releases/tag/v1.0.0"
+            >GTEM on GitHub ↗</a
+          >
+        </div>
+      </div>
+    </header>
+    <section class="section content">
+      <div class="container">
+        <div class="row g-5 align-items-start">
+          <div class="col-lg-7">
+            <p class="kicker mb-2">Why ABM?</p>
+            <h2 class="fw-bold mb-3">From hazard maps to human response</h2>
+            <p class="text-secondary">
+              Physical models estimate hazard intensity and remote sensing
+              identifies impacts. Agent-based models add the human layer: who
+              evacuates, when they start, which route they choose, how
+              congestion develops, and how interventions change the result.
+            </p>
+            <p class="text-secondary">
+              Our work is aimed at both scientific understanding and practical
+              use. The Global Tsunami Evacuation Model (GTEM) develops a simple,
+              open and documented workflow for local governments, while other
+              projects (e.g., TUNAMI-EVAC) explore behavioral realism, adaptive guidance, and
+              Digital Twin integration.
+            </p>
+          </div>
+          <!-- <div class="col-lg-5">
+            <div class="callout">
+              <strong>Core research question</strong>
+              <p class="mb-0 mt-2 text-secondary">
+                How can tsunami evacuation models be used effectively by local
+                governments to improve evacuation planning and education?
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+    <!-- <section class="section-tight">
+      <div class="container">
+        <p class="kicker mb-2">Model framework</p>
+        <h2 class="h3 fw-bold mb-4">Five connected components</h2>
+        <div class="process">
+          <div class="process-step">
+            <span class="num">01</span>
+            <h3>Hazards</h3>
+            <p>
+              Tsunami arrival, inundation, earthquake damage, and warning
+              conditions.
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">02</span>
+            <h3>Environment</h3>
+            <p>
+              Roads, buildings, terrain, shelters, safe zones, and urban
+              facilities.
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">03</span>
+            <h3>Agents</h3>
+            <p>
+              Residents, visitors, households, vulnerable people, and
+              decision-makers.
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">04</span>
+            <h3>Behaviour</h3>
+            <p>
+              Reaction time, route choice, speed, stress, social interaction,
+              and guidance.
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">05</span>
+            <h3>Outcomes</h3>
+            <p>
+              Evacuation time, exposure, congestion, shelter demand, and policy
+              performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <section class="section content">
+      <div class="container">
+        <p class="kicker mb-2">Selected work</p>
+        <h2 class="fw-bold mb-4">From open models to adaptive guidance</h2>
+        <div class="outcome-grid">
+          <div class="outcome">
+            <h3>Global Tsunami Evacuation Model</h3>
+            <p>
+              GTEM builds on earlier NetLogo evacuation research and moves
+              toward a Python-driven, practitioner-oriented workflow.
+            </p>
+            <ul>
+              <li>Open and adaptable case-study structure</li>
+              <li>
+                Scenario testing for roads, population, departure behavior, and
+                safe zones
+              </li>
+              <li>
+                Automated reports, maps, congestion diagnostics, and optional
+                animations
+              </li>
+              <li>Manuals that explain what the model can and cannot answer</li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>TUNAMI-EVAC</h3>
+            <p>
+              Maintenance and development of an open tsunami evacuation model
+              that represents pedestrians moving through urban road networks.
+            </p>
+            <ul>
+              <li>Agent-based pedestrian movement</li>
+              <li>GIS/network-based evacuation</li>
+              <li>Population and age-group inputs</li>
+              <li>Reusable foundation for future scenarios and teaching</li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>Behavior and social interaction</h3>
+            <p>
+              Our research explores how stress, crowd conditions, social-force
+              concepts, and heterogeneous response affect evacuation dynamics.
+            </p>
+            <ul>
+              <li>Delayed departure and reaction distributions</li>
+              <li>Age-dependent movement</li>
+              <li>Congestion and density effects</li>
+              <li>Future extensions for vehicles and mixed traffic</li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>Reinforcement-learning guidance</h3>
+            <p>
+              In the 2024 study, node-agents at intersections learn route
+              recommendations based on local congestion rather than sending
+              everyone along the shortest path.
+            </p>
+            <ul>
+              <li>SARSA reinforcement learning</li>
+              <li>Density-dependent speed</li>
+              <li>Adaptive intersection-by-intersection guidance</li>
+              <li>Strongest benefits during early high-density evacuation</li>
+            </ul>
+            <a
+              href="https://doi.org/10.1016/j.ijdrr.2024.105023"
+              class="card-link"
+              >Read the paper ↗</a
+            >
+          </div>
+          <div class="outcome">
+            <h3>Disaster Digital Twins</h3>
+            <p>
+              Connects evacuation simulation with 3D urban
+              data, people-flow information, infrastructure, sensors, and
+              decision-support layers.
+            </p>
+            <ul>
+              <li>Static and dynamic data integration</li>
+              <li>Normal-time and disaster-time use cases</li>
+              <li>Scenario comparison for bottlenecks and vulnerabilities</li>
+              <li>
+                Future adaptive guidance through signs, signals, or mobile
+                systems
+              </li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>Co-design with practitioners</h3>
+            <p>
+              Through the CDRI Fellowship, local-government feedback informs the
+              functions, outputs, and documentation of the model.
+            </p>
+            <ul>
+              <li>Questionnaires and stakeholder engagement</li>
+              <li>Case studies for coastal communities</li>
+              <li>Simple inputs and interpretable outputs</li>
+              <li>Training and dissemination through international partners</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-tight">
+      <div class="container">
+        <div class="metric-grid">
+          <div class="metric">
+            <strong>Open</strong
+            ><span
+              >Models, documentation, and case studies designed for reuse.</span
+            >
+          </div>
+          <div class="metric">
+            <strong>Multi-scale</strong
+            ><span
+              >From individual movement to city-scale evacuation networks.</span
+            >
+          </div>
+          <div class="metric">
+            <strong>Testable</strong
+            ><span
+              >Scenario comparison, stochastic runs, and convergence
+              checks.</span
+            >
+          </div>
+          <div class="metric">
+            <strong>Actionable</strong
+            ><span>Maps, curves, reports, videos, and planning questions.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section content">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">Practical outputs</p>
+            <h2 class="h3 fw-bold">What can an ABM help answer?</h2>
+            <ul class="text-secondary">
+              <li>
+                How long does evacuation take under different population and
+                warning scenarios?
+              </li>
+              <li>
+                Where do bottlenecks form, and which streets are most critical?
+              </li>
+              <li>
+                How are people distributed across safe zones or evacuation
+                buildings?
+              </li>
+              <li>
+                How do road disruptions, new shelters, or guidance strategies
+                change outcomes?
+              </li>
+              <li>
+                Which groups or areas remain vulnerable when time is limited?
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="col-lg-6">
+            <div class="callout orange">
+              <strong>Current scope and limitations</strong>
+              <p class="mb-0 mt-2 text-secondary">
+                The current GTEM workflow is primarily pedestrian-focused.
+                Vehicle interaction, richer behavioral heterogeneity,
+                topography, and real-time data assimilation are important future
+                extensions. We document these boundaries explicitly so that
+                results are not over-interpreted.
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="section-tight">
+      <div class="container">
+        <div class="callout">
+          <p class="kicker mb-2">Computational methods</p>
+          <h2 class="h3 fw-bold mb-2">
+            Learning behavior, guidance, and decisions
+          </h2>
+          <p class="text-secondary mb-3">
+            AI and related computational methods can help estimate behavioral
+            parameters, represent heterogeneous populations, learn adaptive
+            strategies, and communicate scenarios to users.
+          </p>
+          <div class="pill-list">
+            <span class="pill">ML calibration</span
+            ><span class="pill">Deep learning</span
+            ><span class="pill">Reinforcement learning</span
+            ><span class="pill">LLM interfaces</span
+            ><span class="pill">Multi-agent decision support</span>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

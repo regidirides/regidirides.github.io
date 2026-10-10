@@ -14,6 +14,10 @@
 
   var current = document.body.getAttribute("data-page") || "home";
 
+  // 研究テーマの個別ページでは「研究紹介」をアクティブ表示。
+  var PARENT = { tsunami: "research", abm: "research", rs: "research", ddt: "research" };
+  var navCurrent = PARENT[current] || current;
+
   // サブフォルダ内のページでも共通ヘッダー・フッターが機能するためのパス接頭辞。
   // ルート直下のページは未指定。events/<slug>/event.html などは data-base="../../" を指定。
   var base = document.body.getAttribute("data-base") || "";
@@ -22,11 +26,12 @@
   var EN = {
     home: "index.html", members: "members-en.html", research: "research-en.html",
     publications: "publications-en.html", events: "events-en.html",
-    opportunities: "opportunities-en.html", access: "access-en.html"
+    opportunities: "opportunities-en.html", access: "access-en.html",
+    tsunami: "tsunami-en.html", abm: "abm-en.html", rs: "rs-en.html", ddt: "ddt-en.html"
   };
 
   var links = NAV.map(function (n) {
-    var active = n.id === current ? " active" : "";
+    var active = n.id === navCurrent ? " active" : "";
     return '<li class="nav-item"><a class="nav-link' + active + '" href="' + base + n.href + '">' + n.label + "</a></li>";
   }).join("");
 

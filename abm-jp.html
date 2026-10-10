@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #2c2c2b;
+        --muted: #707782;
+        --line: #e6e5e3;
+        --surface: #f8fafc;
+        --blue: #2783de;
+        --blue-soft: #e8f3fc;
+        --green: #46a171;
+        --green-soft: #e8f1ec;
+        --orange: #d5803b;
+        --orange-soft: #fbebde;
+        --purple: #7758a6;
+        --purple-soft: #f0eafa;
+      }
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #fff;
+      }
+      .page-header {
+        background: linear-gradient(135deg, #f6fbff 0%, #fff 62%, #f8fafc 100%);
+        border-bottom: 1px solid var(--line);
+        padding: 76px 0 64px;
+      }
+      .page-header .eyebrow,
+      .eyebrow {
+        color: var(--blue);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .page-header h1 {
+        font-size: clamp(2.4rem, 5vw, 4.35rem);
+        letter-spacing: -0.055em;
+      }
+      .page-header .lead {
+        max-width: 760px;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+      .section {
+        padding: 25px 0;
+      }
+      .section-tight {
+        padding: 48px 0;
+      }
+      .content {
+        line-height: 1.75;
+      }
+      .content h2 {
+        letter-spacing: -0.035em;
+      }
+      .content h3 {
+        letter-spacing: -0.025em;
+      }
+      .text-secondary {
+        color: var(--muted) !important;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .topic-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .topic-card:hover {
+        transform: translateY(-3px);
+        border-color: #bcdcf6;
+        box-shadow: 0 8px 22px rgba(39, 131, 222, 0.1);
+      }
+      .topic-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+      }
+      .topic-card:nth-child(2) .topic-icon {
+        background: var(--orange-soft);
+        color: var(--orange);
+      }
+      .topic-card:nth-child(3) .topic-icon {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+      .topic-card:nth-child(4) .topic-icon {
+        background: var(--purple-soft);
+        color: var(--purple);
+      }
+      .topic-card h3 {
+        font-size: 1.08rem;
+        line-height: 1.35;
+      }
+      .topic-card p {
+        font-size: 0.91rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .topic-card .card-link {
+        margin-top: auto;
+        padding-top: 18px;
+        color: var(--blue);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .topic-card .card-link:hover {
+        text-decoration: underline;
+      }
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .feature-strip > div {
+        padding: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .feature-strip > div:last-child {
+        border-right: 0;
+      }
+      .feature-strip strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 5px;
+      }
+      .feature-strip span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .callout {
+        border-left: 4px solid var(--blue);
+        background: var(--blue-soft);
+        padding: 24px 26px;
+        border-radius: 0 12px 12px 0;
+      }
+      .callout.green {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+      .callout.orange {
+        border-color: var(--orange);
+        background: var(--orange-soft);
+      }
+      .callout.purple {
+        border-color: var(--purple);
+        background: var(--purple-soft);
+      }
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .research-tag,
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1f4f7;
+        color: #4f5965;
+        font-size: 0.76rem;
+        font-weight: 600;
+      }
+      .research-divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 60px 0;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .figure-card {
+        height: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .figure-card img {
+        width: 100%;
+        max-height: 310px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .figure-card figcaption {
+        padding: 13px 2px 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .figure-card.no-image {
+        padding: 26px;
+      }
+      .process {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        align-items: stretch;
+      }
+      .process-step {
+        position: relative;
+        padding: 24px 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        min-height: 150px;
+      }
+      .process-step:not(:last-child) {
+        border-right: 0;
+      }
+      .process-step:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+      .process-step:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+      .process-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 29px;
+        height: 29px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 800;
+      }
+      .process-step .num {
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        color: var(--blue);
+        font-weight: 800;
+      }
+      .process-step h3 {
+        font-size: 1rem;
+        margin: 12px 0 8px;
+      }
+      .process-step p {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .outcome {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .outcome h3 {
+        font-size: 1rem;
+      }
+      .outcome p,
+      .outcome li {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .outcome ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .metric {
+        padding: 22px;
+        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .metric strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--blue);
+        letter-spacing: -0.04em;
+      }
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+      .btn-lab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+        padding: 11px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--blue);
+        color: var(--blue);
+        background: #fff;
+      }
+      .btn-lab.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-lab:hover {
+        filter: brightness(0.96);
+        color: inherit;
+      }
+      .btn-lab.primary:hover {
+        color: #fff;
+      }
+      @media (max-width: 991px) {
+        .topic-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+        }
+        .feature-strip > div:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .process {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .process-step,
+        .process-step:not(:last-child) {
+          border: 1px solid var(--line);
+          border-radius: 12px;
+        }
+        .process-step:not(:last-child)::after {
+          content: "↓";
+          right: auto;
+          top: auto;
+          bottom: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .metric-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 575px) {
+        .page-header {
+          padding: 56px 0 46px;
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .topic-grid,
+        .outcome-grid {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip > div,
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .feature-strip > div:last-child {
+          border-bottom: 0;
+        }
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2.7rem;
+        }
+      }
+    </style>
+
+    <title>
+      エージェントベースモデリング・人流・LLMを用いた分析 — 災害ジオインフォマティクス研究分野（ReGiD）
+    </title>
+    <meta
+      name="description"
+      content="災害ジオインフォマティクス研究分野（ReGiD）による、津波避難、人間行動、施策の検証、災害デジタルツインのためのエージェントベースモデリング。"
+    />
+  </head>
+  <body data-page="abm">
+    <div id="site-header"></div>
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow mb-2">研究テーマ</p>
+        <h1 class="fw-bold mb-3">
+          エージェントベースモデリング・人流・LLMを用いた分析
+        </h1>
+        <p class="lead text-secondary mb-4">
+          エージェントベースモデルを用いて、ハザードの状況や都市環境と、災害対応（避難、資源配分、意思決定など）を左右する人々の判断・移動・相互作用とを結びつけます。
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn-lab primary" href="research-jp.html"
+            >← 研究紹介に戻る</a
+          ><a class="btn-lab" href="https://github.com/erick2307/TUNAMI-EVAC"
+            >TUNAMI-EVAC（GitHub）↗</a
+          >
+          <a class="btn-lab" href="https://github.com/regidirides/gtem-model/releases/tag/v1.0.0"
+            >GTEM（GitHub）↗</a
+          >
+        </div>
+      </div>
+    </header>
+    <section class="section content">
+      <div class="container">
+        <div class="row g-5 align-items-start">
+          <div class="col-lg-7">
+            <p class="kicker mb-2">なぜABMか？</p>
+            <h2 class="fw-bold mb-3">ハザードマップから人々の対応へ</h2>
+            <p class="text-secondary">
+              物理モデルはハザードの強度を推定し、リモートセンシングは被害を把握します。エージェントベースモデルはそこに人間のレイヤーを加えます。誰が避難するのか、いつ避難を開始するのか、どの経路を選ぶのか、混雑がどのように発生するのか、そして対策によって結果がどう変わるのかを明らかにします。
+            </p>
+            <p class="text-secondary">
+              私たちの研究は、科学的な理解と実務での活用の両方を目指しています。全球津波避難モデル（GTEM）では、自治体向けのシンプルでオープンかつ文書化されたワークフローを開発しています。また、他のプロジェクト（TUNAMI-EVACなど）では、行動の現実性、適応的な避難誘導、デジタルツインとの統合を探究しています。
+            </p>
+          </div>
+          <!-- <div class="col-lg-5">
+            <div class="callout">
+              <strong>中心となる研究課題</strong>
+              <p class="mb-0 mt-2 text-secondary">
+                自治体が避難計画や防災教育の改善に津波避難モデルを効果的に活用するにはどうすればよいか？
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+    <!-- <section class="section-tight">
+      <div class="container">
+        <p class="kicker mb-2">モデルの枠組み</p>
+        <h2 class="h3 fw-bold mb-4">相互につながる5つの構成要素</h2>
+        <div class="process">
+          <div class="process-step">
+            <span class="num">01</span>
+            <h3>ハザード</h3>
+            <p>
+              津波の到達、浸水、地震被害、警報の状況。
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">02</span>
+            <h3>環境</h3>
+            <p>
+              道路、建物、地形、避難所、安全域、都市施設。
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">03</span>
+            <h3>エージェント</h3>
+            <p>
+              住民、来訪者、世帯、要配慮者、意思決定者。
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">04</span>
+            <h3>行動</h3>
+            <p>
+              反応時間、経路選択、速度、ストレス、社会的相互作用、避難誘導。
+            </p>
+          </div>
+          <div class="process-step">
+            <span class="num">05</span>
+            <h3>結果</h3>
+            <p>
+              避難時間、曝露、混雑、避難所の需要、施策の効果。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <section class="section content">
+      <div class="container">
+        <p class="kicker mb-2">主な研究</p>
+        <h2 class="fw-bold mb-4">オープンなモデルから適応的な避難誘導へ</h2>
+        <div class="outcome-grid">
+          <div class="outcome">
+            <h3>全球津波避難モデル（GTEM）</h3>
+            <p>
+              GTEMは、これまでのNetLogoによる避難研究を発展させ、Pythonで駆動する実務者向けのワークフローへと移行するものです。
+            </p>
+            <ul>
+              <li>オープンで応用しやすい事例研究の構成</li>
+              <li>
+                道路、人口、避難開始行動、安全域に関するシナリオ検証
+              </li>
+              <li>
+                レポート、地図、混雑診断、アニメーション（任意）の自動生成
+              </li>
+              <li>モデルで答えられること・答えられないことを解説するマニュアル</li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>TUNAMI-EVAC</h3>
+            <p>
+              都市の道路ネットワークを移動する歩行者を表現する、オープンな津波避難モデルの維持・開発。
+            </p>
+            <ul>
+              <li>エージェントベースの歩行者移動</li>
+              <li>GIS・ネットワークに基づく避難</li>
+              <li>人口・年齢層の入力</li>
+              <li>今後のシナリオや教育に再利用できる基盤</li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>行動と社会的相互作用</h3>
+            <p>
+              ストレス、群集の状態、ソーシャルフォースの概念、多様な反応が、避難のダイナミクスにどのように影響するかを研究しています。
+            </p>
+            <ul>
+              <li>避難開始の遅れと反応時間の分布</li>
+              <li>年齢に応じた移動</li>
+              <li>混雑と密度の影響</li>
+              <li>車両や混合交通への今後の拡張</li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>強化学習による避難誘導</h3>
+            <p>
+              2024年の研究では、交差点に配置したノードエージェントが、全員を最短経路に誘導するのではなく、局所的な混雑に基づいて推奨経路を学習します。
+            </p>
+            <ul>
+              <li>SARSAによる強化学習</li>
+              <li>密度に依存する歩行速度</li>
+              <li>交差点ごとの適応的な誘導</li>
+              <li>避難初期の高密度時に最も大きな効果</li>
+            </ul>
+            <a
+              href="https://doi.org/10.1016/j.ijdrr.2024.105023"
+              class="card-link"
+              >論文を読む ↗</a
+            >
+          </div>
+          <div class="outcome">
+            <h3>災害デジタルツイン</h3>
+            <p>
+              避難シミュレーションを、3D都市データ、人流情報、インフラ、センサー、意思決定支援のレイヤーと結びつけます。
+            </p>
+            <ul>
+              <li>静的・動的データの統合</li>
+              <li>平常時と災害時のユースケース</li>
+              <li>ボトルネックと脆弱性を把握するためのシナリオ比較</li>
+              <li>
+                標識、信号、モバイルシステムを通じた今後の適応的な避難誘導
+              </li>
+            </ul>
+          </div>
+          <div class="outcome">
+            <h3>実務者との共同設計</h3>
+            <p>
+              CDRIフェローシップを通じて、自治体からのフィードバックをモデルの機能、出力、ドキュメントに反映しています。
+            </p>
+            <ul>
+              <li>アンケートとステークホルダーとの対話</li>
+              <li>沿岸地域の事例研究</li>
+              <li>シンプルな入力と解釈しやすい出力</li>
+              <li>国際的なパートナーを通じた研修と普及</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-tight">
+      <div class="container">
+        <div class="metric-grid">
+          <div class="metric">
+            <strong>オープン</strong
+            ><span
+              >再利用を前提に設計されたモデル、ドキュメント、事例研究。</span
+            >
+          </div>
+          <div class="metric">
+            <strong>マルチスケール</strong
+            ><span
+              >個人の移動から都市規模の避難ネットワークまで。</span
+            >
+          </div>
+          <div class="metric">
+            <strong>検証可能</strong
+            ><span
+              >シナリオ比較、確率的な反復計算、収束の確認。</span
+            >
+          </div>
+          <div class="metric">
+            <strong>実践的</strong
+            ><span>地図、曲線、レポート、動画、計画上の問い。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section content">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">実務への成果</p>
+            <h2 class="h3 fw-bold">ABMで何がわかるのか？</h2>
+            <ul class="text-secondary">
+              <li>
+                人口や警報のシナリオが異なる場合、避難にどれくらいの時間がかかるか？
+              </li>
+              <li>
+                ボトルネックはどこで発生し、どの道路が最も重要か？
+              </li>
+              <li>
+                安全域や避難ビルに人々はどのように分散するか？
+              </li>
+              <li>
+                道路の寸断、新たな避難所、避難誘導の方策によって結果はどう変わるか？
+              </li>
+              <li>
+                時間が限られる場合、どの集団や地域が脆弱なまま残るか？
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="col-lg-6">
+            <div class="callout orange">
+              <strong>現在の対象範囲と限界</strong>
+              <p class="mb-0 mt-2 text-secondary">
+                現在のGTEMワークフローは主に徒歩避難を対象としています。車両との相互作用、より多様な行動の表現、地形、リアルタイムのデータ同化は、今後の重要な拡張課題です。結果が過大に解釈されないよう、こうした適用範囲を明示しています。
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="section-tight">
+      <div class="container">
+        <div class="callout">
+          <p class="kicker mb-2">計算手法</p>
+          <h2 class="h3 fw-bold mb-2">
+            行動・避難誘導・意思決定の学習
+          </h2>
+          <p class="text-secondary mb-3">
+            AIや関連する計算手法は、行動パラメータの推定、多様な人々の表現、適応的な戦略の学習、利用者へのシナリオの伝達に役立ちます。
+          </p>
+          <div class="pill-list">
+            <span class="pill">機械学習によるキャリブレーション</span
+            ><span class="pill">深層学習</span
+            ><span class="pill">強化学習</span
+            ><span class="pill">LLMインターフェース</span
+            ><span class="pill">マルチエージェント意思決定支援</span>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site-jp.js"></script>
+  </body>
+</html>

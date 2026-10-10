@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #2c2c2b;
+        --muted: #707782;
+        --line: #e6e5e3;
+        --surface: #f8fafc;
+        --blue: #2783de;
+        --blue-soft: #e8f3fc;
+        --green: #46a171;
+        --green-soft: #e8f1ec;
+        --orange: #d5803b;
+        --orange-soft: #fbebde;
+        --purple: #7758a6;
+        --purple-soft: #f0eafa;
+      }
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #fff;
+      }
+      .page-header {
+        background: linear-gradient(135deg, #f6fbff 0%, #fff 62%, #f8fafc 100%);
+        border-bottom: 1px solid var(--line);
+        padding: 76px 0 64px;
+      }
+      .page-header .eyebrow,
+      .eyebrow {
+        color: var(--blue);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .page-header h1 {
+        font-size: clamp(2.4rem, 5vw, 4.35rem);
+        letter-spacing: -0.055em;
+      }
+      .page-header .lead {
+        max-width: 760px;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+      .section {
+        padding: 25px 0;
+      }
+      .section-tight {
+        padding: 48px 0;
+      }
+      .content {
+        line-height: 1.75;
+      }
+      .content h2 {
+        letter-spacing: -0.035em;
+      }
+      .content h3 {
+        letter-spacing: -0.025em;
+      }
+      .text-secondary {
+        color: var(--muted) !important;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .topic-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .topic-card:hover {
+        transform: translateY(-3px);
+        border-color: #bcdcf6;
+        box-shadow: 0 8px 22px rgba(39, 131, 222, 0.1);
+      }
+      .topic-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+      }
+      .topic-card:nth-child(2) .topic-icon {
+        background: var(--orange-soft);
+        color: var(--orange);
+      }
+      .topic-card:nth-child(3) .topic-icon {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+      .topic-card:nth-child(4) .topic-icon {
+        background: var(--purple-soft);
+        color: var(--purple);
+      }
+      .topic-card h3 {
+        font-size: 1.08rem;
+        line-height: 1.35;
+      }
+      .topic-card p {
+        font-size: 0.91rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .topic-card .card-link {
+        margin-top: auto;
+        padding-top: 18px;
+        color: var(--blue);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .topic-card .card-link:hover {
+        text-decoration: underline;
+      }
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .feature-strip > div {
+        padding: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .feature-strip > div:last-child {
+        border-right: 0;
+      }
+      .feature-strip strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 5px;
+      }
+      .feature-strip span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .callout {
+        border-left: 4px solid var(--blue);
+        background: var(--blue-soft);
+        padding: 24px 26px;
+        border-radius: 0 12px 12px 0;
+      }
+      .callout.green {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+      .callout.orange {
+        border-color: var(--orange);
+        background: var(--orange-soft);
+      }
+      .callout.purple {
+        border-color: var(--purple);
+        background: var(--purple-soft);
+      }
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .research-tag,
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1f4f7;
+        color: #4f5965;
+        font-size: 0.76rem;
+        font-weight: 600;
+      }
+      .research-divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 60px 0;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .figure-card {
+        height: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .figure-card img {
+        width: 100%;
+        max-height: 310px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .figure-card figcaption {
+        padding: 13px 2px 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .figure-card.no-image {
+        padding: 26px;
+      }
+      .process {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        align-items: stretch;
+      }
+      .process-step {
+        position: relative;
+        padding: 24px 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        min-height: 150px;
+      }
+      .process-step:not(:last-child) {
+        border-right: 0;
+      }
+      .process-step:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+      .process-step:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+      .process-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 29px;
+        height: 29px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 800;
+      }
+      .process-step .num {
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        color: var(--blue);
+        font-weight: 800;
+      }
+      .process-step h3 {
+        font-size: 1rem;
+        margin: 12px 0 8px;
+      }
+      .process-step p {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .outcome {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .outcome h3 {
+        font-size: 1rem;
+      }
+      .outcome p,
+      .outcome li {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .outcome ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .metric {
+        padding: 22px;
+        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .metric strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--blue);
+        letter-spacing: -0.04em;
+      }
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+      .btn-lab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+        padding: 11px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--blue);
+        color: var(--blue);
+        background: #fff;
+      }
+      .btn-lab.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-lab:hover {
+        filter: brightness(0.96);
+        color: inherit;
+      }
+      .btn-lab.primary:hover {
+        color: #fff;
+      }
+      @media (max-width: 991px) {
+        .topic-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+        }
+        .feature-strip > div:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .process {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .process-step,
+        .process-step:not(:last-child) {
+          border: 1px solid var(--line);
+          border-radius: 12px;
+        }
+        .process-step:not(:last-child)::after {
+          content: "↓";
+          right: auto;
+          top: auto;
+          bottom: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .metric-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 575px) {
+        .page-header {
+          padding: 56px 0 46px;
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .topic-grid,
+        .outcome-grid {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip > div,
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .feature-strip > div:last-child {
+          border-bottom: 0;
+        }
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2.7rem;
+        }
+      }
+    </style>
+
+    <title>
+      HPC Real-time Tsunami Forecasting — Disaster Geoinformatics Lab. (ReGiD)
+    </title>
+    <meta
+      name="description"
+      content="Tsunami inundation, damage estimation, worst-case scenarios, and high-performance simulation at ReGiD."
+    />
+  </head>
+  <body data-page="tsunami">
+    <div id="site-header"></div>
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow mb-2">Research theme</p>
+        <h1 class="fw-bold mb-3">HPC Real-time Tsunami Forecasting</h1>
+        <p class="lead text-secondary mb-4">
+          We develop fast and accurate methods to estimate tsunami inundation,
+          damage, and uncertainty for urban-scale impact assessment.
+        </p>
+        <a class="btn-lab" href="research-en.html">← Research overview</a>
+      </div>
+    </header>
+    <section class="section content">
+      <div class="container">
+        <div class="callout mb-5">
+          <p class="kicker mb-2">Real-time ambition</p>
+          <h2 class="h3 fw-bold mb-2">The “10-10-10 Challenge”</h2>
+          <p class="text-secondary mb-0">
+            Estimate the tsunami source in roughly 10 minutes, compute
+            inundation on a 10 m mesh in roughly 10 minutes, and deliver
+            actionable information soon after an earthquake.
+          </p>
+        </div>
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">01 · Real-time assessment</p>
+            <h2 class="h3 fw-bold">Tsunami inundation and damage estimation</h2>
+            <p class="text-secondary">
+              Using real-time earthquake information and supercomputing, we
+              develop technology to estimate tsunami damage rapidly. The work
+              combines source estimation, inundation computation, building
+              exposure, and fragility functions in collaboration with university
+              and industry partners.
+            </p>
+            <div class="pill-list">
+              <span class="pill">Real-time computing</span
+              ><span class="pill">10 m mesh</span
+              ><span class="pill">Damage estimation</span
+              ><span class="pill">Fragility functions</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/sx-ace.png"
+                alt="Real-time tsunami inundation and damage prediction using the SX-ACE supercomputer"
+              />
+              <figcaption>
+                Real-time tsunami inundation and damage prediction using
+                high-performance computing.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <!-- <hr class="research-divider" /> -->
+        <div class="row g-4 align-items-center flex-lg-row-reverse">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">02 · Large-scale scenarios</p>
+            <h2 class="h3 fw-bold">
+              Big-data analysis for disaster mitigation
+            </h2>
+            <p class="text-secondary">
+              The JST CREST project brings together disaster simulation,
+              disaster management science, mathematics, and information science.
+              Large-scale numerical simulation and real-time data assimilation
+              help explore the “scenario explosion” and identify measures that
+              can reduce worst-case impacts.
+            </p>
+            <div class="pill-list">
+              <span class="pill">Data assimilation</span
+              ><span class="pill">Scenario analysis</span
+              ><span class="pill">Decision support</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/crest.png"
+                alt="Controlling the scenario explosion in large-scale disaster simulation"
+              />
+              <figcaption>
+                Controlling the scenario explosion in large-scale disaster
+                simulation.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <!-- <hr class="research-divider" /> -->
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">03 · International applications</p>
+            <h2 class="h3 fw-bold">South American tsunami prediction</h2>
+            <p class="text-secondary">
+              For tsunami-prone countries in Central and South America, we
+              combine real-time computation, remote sensing, GIS, and fragility
+              functions to assess near-field and far-field impacts and support
+              wide-area damage estimation.
+            </p>
+            <div class="pill-list">
+              <span class="pill">Latin America</span
+              ><span class="pill">GIS</span
+              ><span class="pill">Near/far field</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/latinamerica.png"
+                alt="Wide-area damage assessment for South American countries"
+              />
+              <figcaption>
+                Wide-area damage assessment combining tsunami simulation and
+                remote sensing.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <!-- <hr class="research-divider" /> -->
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">04 · Urban tsunami physics</p>
+            <h2 class="h3 fw-bold">
+              Simulation that reproduces building damage
+            </h2>
+            <p class="text-secondary">
+              In dense urban areas, buildings obstruct flow and may be washed
+              away as inundation progresses. A time-evolving synthetic
+              equivalent roughness approach reproduces the changing urban
+              surface and estimates which buildings fail, when, and how many.
+            </p>
+            <div class="pill-list">
+              <span class="pill">Building damage</span
+              ><span class="pill">Tsunami simulation</span
+              ><span class="pill">Equivalent roughness</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/damageestimation.png"
+                alt="Observed and estimated washed-away buildings"
+              />
+              <figcaption>
+                Observed and estimated washed-away building distributions for
+                the Sendai Plain.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <!-- <hr class="research-divider" /> -->
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">05 · Next-generation methods</p>
+            <h2 class="h3 fw-bold">Lattice Boltzmann tsunami simulation</h2>
+            <p class="text-secondary">
+              The Lattice Boltzmann method is a fully explicit scheme well
+              suited to massively parallel computing. We explore its potential
+              for faster urban run-up simulation while maintaining useful
+              accuracy.
+            </p>
+             <div class="pill-list">
+              <span class="pill">Lattice Boltzmann</span
+              ><span class="pill">Parallel computing</span
+              ><span class="pill">Tsunami simulation</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/lbm.png"
+                alt="Tsunami inundation simulation using the Lattice Boltzmann method"
+              />
+              <figcaption>
+                Tsunami inundation simulation using the Lattice Boltzmann
+                method.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <!-- <hr class="research-divider" /> -->
+        <div class="row g-4 align-items-center flex-lg-row-reverse">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">06 · Uncertainty and early warning</p>
+            <h2 class="h3 fw-bold">Rapid worst-case tsunami estimation</h2>
+            <p class="text-secondary">
+              Immediately after an earthquake, the initial source estimate is
+              uncertain. By exploring many possible fault arrangements, we
+              estimate a credible worst-case tsunami scenario in minutes to
+              support rapid assessment and evacuation decisions.
+            </p>
+            <div class="pill-list">
+              <span class="pill">Early warning</span
+              ><span class="pill">Uncertainty</span
+              ><span class="pill">Worst-case scenarios</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/eew_tsunami.png"
+                alt="Fault arrangements for worst-case tsunami estimation"
+              />
+              <figcaption>
+                Example fault arrangements used to explore high-amplitude
+                tsunami scenarios.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="section-tight">
+      <div class="container">
+        <div class="callout orange">
+          <p class="kicker mb-2">Computational methods</p>
+          <h2 class="h3 fw-bold mb-2">
+            Intelligent methods for tsunami science
+          </h2>
+          <p class="text-secondary mb-3">
+            Machine learning, surrogate modeling, uncertainty exploration, and
+            reinforcement learning can support source estimation, rapid scenario
+            search, adaptive guidance, and decision support alongside
+            physics-based simulation.
+          </p>
+          <div class="pill-list">
+            <span class="pill">Source estimation</span
+            ><span class="pill">Surrogate models</span
+            ><span class="pill">Uncertainty exploration</span
+            ><span class="pill">RL guidance</span>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

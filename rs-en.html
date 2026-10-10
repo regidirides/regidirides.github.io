@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #2c2c2b;
+        --muted: #707782;
+        --line: #e6e5e3;
+        --surface: #f8fafc;
+        --blue: #2783de;
+        --blue-soft: #e8f3fc;
+        --green: #46a171;
+        --green-soft: #e8f1ec;
+        --orange: #d5803b;
+        --orange-soft: #fbebde;
+        --purple: #7758a6;
+        --purple-soft: #f0eafa;
+      }
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: #fff;
+      }
+      .page-header {
+        background: linear-gradient(135deg, #f6fbff 0%, #fff 62%, #f8fafc 100%);
+        border-bottom: 1px solid var(--line);
+        padding: 76px 0 64px;
+      }
+      .page-header .eyebrow,
+      .eyebrow {
+        color: var(--blue);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .page-header h1 {
+        font-size: clamp(2.4rem, 5vw, 4.35rem);
+        letter-spacing: -0.055em;
+      }
+      .page-header .lead {
+        max-width: 760px;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+      .section {
+        padding: 25px 0;
+      }
+      .section-tight {
+        padding: 48px 0;
+      }
+      .content {
+        line-height: 1.75;
+      }
+      .content h2 {
+        letter-spacing: -0.035em;
+      }
+      .content h3 {
+        letter-spacing: -0.025em;
+      }
+      .text-secondary {
+        color: var(--muted) !important;
+      }
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .topic-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .topic-card:hover {
+        transform: translateY(-3px);
+        border-color: #bcdcf6;
+        box-shadow: 0 8px 22px rgba(39, 131, 222, 0.1);
+      }
+      .topic-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+      }
+      .topic-card:nth-child(2) .topic-icon {
+        background: var(--orange-soft);
+        color: var(--orange);
+      }
+      .topic-card:nth-child(3) .topic-icon {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+      .topic-card:nth-child(4) .topic-icon {
+        background: var(--purple-soft);
+        color: var(--purple);
+      }
+      .topic-card h3 {
+        font-size: 1.08rem;
+        line-height: 1.35;
+      }
+      .topic-card p {
+        font-size: 0.91rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .topic-card .card-link {
+        margin-top: auto;
+        padding-top: 18px;
+        color: var(--blue);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .topic-card .card-link:hover {
+        text-decoration: underline;
+      }
+      .feature-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .feature-strip > div {
+        padding: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .feature-strip > div:last-child {
+        border-right: 0;
+      }
+      .feature-strip strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 5px;
+      }
+      .feature-strip span {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .callout {
+        border-left: 4px solid var(--blue);
+        background: var(--blue-soft);
+        padding: 24px 26px;
+        border-radius: 0 12px 12px 0;
+      }
+      .callout.green {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+      .callout.orange {
+        border-color: var(--orange);
+        background: var(--orange-soft);
+      }
+      .callout.purple {
+        border-color: var(--purple);
+        background: var(--purple-soft);
+      }
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .research-tag,
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f1f4f7;
+        color: #4f5965;
+        font-size: 0.76rem;
+        font-weight: 600;
+      }
+      .research-divider {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 60px 0;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+      .figure-card {
+        height: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .figure-card img {
+        width: 100%;
+        max-height: 310px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .figure-card figcaption {
+        padding: 13px 2px 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .figure-card.no-image {
+        padding: 26px;
+      }
+      .process {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        align-items: stretch;
+      }
+      .process-step {
+        position: relative;
+        padding: 24px 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        min-height: 150px;
+      }
+      .process-step:not(:last-child) {
+        border-right: 0;
+      }
+      .process-step:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+      .process-step:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+      .process-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 29px;
+        height: 29px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 800;
+      }
+      .process-step .num {
+        font-size: 0.73rem;
+        letter-spacing: 0.1em;
+        color: var(--blue);
+        font-weight: 800;
+      }
+      .process-step h3 {
+        font-size: 1rem;
+        margin: 12px 0 8px;
+      }
+      .process-step p {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .outcome {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .outcome h3 {
+        font-size: 1rem;
+      }
+      .outcome p,
+      .outcome li {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .outcome ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .metric {
+        padding: 22px;
+        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+      }
+      .metric strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--blue);
+        letter-spacing: -0.04em;
+      }
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+      .btn-lab {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+        padding: 11px 16px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--blue);
+        color: var(--blue);
+        background: #fff;
+      }
+      .btn-lab.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-lab:hover {
+        filter: brightness(0.96);
+        color: inherit;
+      }
+      .btn-lab.primary:hover {
+        color: #fff;
+      }
+      @media (max-width: 991px) {
+        .topic-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+        }
+        .feature-strip > div:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+        .process {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .process-step,
+        .process-step:not(:last-child) {
+          border: 1px solid var(--line);
+          border-radius: 12px;
+        }
+        .process-step:not(:last-child)::after {
+          content: "↓";
+          right: auto;
+          top: auto;
+          bottom: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .metric-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 575px) {
+        .page-header {
+          padding: 56px 0 46px;
+        }
+        .section {
+          padding: 56px 0;
+        }
+        .topic-grid,
+        .outcome-grid {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip {
+          grid-template-columns: 1fr;
+        }
+        .feature-strip > div,
+        .feature-strip > div:nth-child(2) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .feature-strip > div:last-child {
+          border-bottom: 0;
+        }
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-header h1 {
+          font-size: 2.7rem;
+        }
+      }
+    </style>
+
+    <title>
+      Earth Observation, Data Fusion, and Physics-constrained AI — Disaster
+      Geoinformatics Lab. (ReGiD)
+    </title>
+    <meta
+      name="description"
+      content="Rapid disaster damage and flood mapping using satellite remote sensing, SAR, optical imagery, and machine learning at ReGiD."
+    />
+  </head>
+  <body data-page="rs">
+    <div id="site-header"></div>
+
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow mb-2">Research theme</p>
+        <h1 class="fw-bold mb-3">
+          Earth Observation, Data Fusion, and Physics-constrained AI
+        </h1>
+        <p class="lead text-secondary mb-4">
+          We turn satellite observations into rapid, scalable information about
+          damaged buildings, flooded areas, and changing urban environments.
+        </p>
+        <a class="btn-lab" href="research-en.html">← Research overview</a>
+      </div>
+    </header>
+    <section class="section content">
+      <div class="container">
+        <div class="row g-4 mb-5">
+          <div class="col-lg-7">
+            <p class="kicker mb-2">Why remote sensing?</p>
+            <h2 class="h3 fw-bold">Observe impacts when access is difficult</h2>
+            <p class="text-secondary">
+              After a disaster, field access can be dangerous, slow, or
+              incomplete. Satellite data provide a repeatable way to observe
+              large areas, identify changes, and guide response. Our work
+              combines SAR and optical imagery with machine learning, GIS, and
+              physical damage knowledge.
+            </p>
+          </div>
+          <div class="col-lg-5">
+            <div class="callout green">
+              <strong>Research goal</strong>
+              <p class="text-secondary mb-0 mt-2">
+                Deliver actionable information about where disasters strike and
+                the severity of their impacts.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">01 · Earthquake damage</p>
+            <h2 class="h3 fw-bold">
+              Building-damage assessment with polarimetric SAR
+            </h2>
+            <p class="text-secondary">
+              A single post-seismic dual-polarimetric ALOS-2/PALSAR-2 image can
+              help distinguish slightly damaged, collapsed, and tilted
+              buildings. Machine-learning methods were applied to built-up areas
+              with different damage levels after the 2015 Nepal earthquake.
+            </p>
+            <div class="pill-list">
+              <span class="pill">ALOS-2/PALSAR-2</span
+              ><span class="pill">Building damage</span
+              ><span class="pill">Machine learning</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/sar_nepal.png"
+                alt="Machine-learning building damage mapping using polarimetric SAR"
+              />
+              <figcaption>
+                Machine-learning method for building-damage mapping from
+                polarimetric SAR imagery.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <hr class="research-divider" />
+        <div class="row g-4 align-items-center flex-lg-row-reverse">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">02 · Flood mapping</p>
+            <h2 class="h3 fw-bold">
+              Extracting flooded urban areas from L-band SAR
+            </h2>
+            <p class="text-secondary">
+              SAR can support flood mapping even when clouds or darkness limit
+              optical imagery. We developed methods to detect flooded areas in
+              built-up environments using the September 2015 Kanto–Tohoku
+              heavy-rain event as a case study.
+            </p>
+            <div class="pill-list">
+              <span class="pill">L-band SAR</span
+              ><span class="pill">Flood mapping</span
+              ><span class="pill">Change detection</span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <figure class="figure-card">
+              <img
+                src="image/palsar.png"
+                alt="Flooded-area extraction near overtopping locations"
+              />
+              <figcaption>
+                Flooded-area extraction near overtopping locations using
+                SAR-derived indicators.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <hr class="research-divider" />
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-6">
+            <p class="kicker mb-2">03 · Multi-hazard integration</p>
+            <h2 class="h3 fw-bold">Rapid damage mapping for response</h2>
+            <p class="text-secondary">
+              We combine SAR, optical data, built-up-area information, and
+              machine-learning methods to detect collapsed buildings and flooded
+              areas for emergency response. The goal is to provide reliable
+              spatial information quickly enough to support prioritization.
+            </p>
+            <div class="pill-list">
+              <span class="pill">SAR and optical</span
+              ><span class="pill">AI</span
+              ><span class="pill">Rapid assessment</span
+              ><span class="pill">Data fusion</span>
+            </div>
+          </div>
+          <!-- <div class="col-lg-6">
+            <div class="figure-card no-image">
+              <p class="kicker mb-2">From pixels to decisions</p>
+              <h3 class="h4 fw-bold">A reusable assessment chain</h3>
+              <div class="process mt-4">
+                <div class="process-step">
+                  <span class="num">01</span>
+                  <h3>Acquire</h3>
+                  <p>Satellite and reference data.</p>
+                </div>
+                <div class="process-step">
+                  <span class="num">02</span>
+                  <h3>Detect</h3>
+                  <p>Change and damage signatures.</p>
+                </div>
+                <div class="process-step">
+                  <span class="num">03</span>
+                  <h3>Map</h3>
+                  <p>Spatial products for response.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <!-- <hr class="research-divider" /> -->
+        <!-- <div class="row g-4">
+          <div class="col-lg-4">
+            <p class="kicker mb-2">04 · South America</p>
+            <h2 class="h3 fw-bold">Wide-area assessment</h2>
+          </div>
+          <div class="col-lg-8">
+            <p class="text-secondary">
+              In South American tsunami applications, remote sensing is combined
+              with real-time tsunami simulation and fragility functions.
+              Near-field and far-field impacts can be assessed separately,
+              creating a bridge between physical hazard estimates and observed
+              damage.
+            </p>
+            <div class="pill-list">
+              <span class="pill">Tsunami impacts</span
+              ><span class="pill">Fragility functions</span
+              ><span class="pill">GIS</span
+              ><span class="pill">Humanitarian response</span>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- <section class="section-tight"><div class="container"><div class="callout green">
+  <p class="kicker mb-2">Computational methods</p>
+  <h2 class="h3 fw-bold mb-2">Earth observation, data fusion, and intelligent analysis</h2>
+  <p class="text-secondary mb-0">Machine learning and deep learning support damage and flood mapping, while physical knowledge, data fusion, and geospatial analysis help produce reliable information for disaster response and connected research applications.</p>
+</div></div></section> -->
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>
