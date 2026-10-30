@@ -12,7 +12,16 @@
 */
 (function () {
   var EVENTS = [
-        {    
+    {
+      date: "2026-10-15",
+      dateLabel: "2026.10.15",
+      title: "New JST LOTUS Programme Project: GeoAI Framework for Hydrological Resilience in Intermontane Basins",
+      location: "Dehradun, India · Sendai, Japan",
+      thumb: "events/20261015_JST_LOTUS/slide-1.jpg",
+      summary: "Our project has been selected for the JST LOTUS Programme (ASPIRE type). Kshitiz Agarwal (IIT Roorkee) joins the lab from February to December 2027 to build a GeoAI framework that turns hazard maps into plans for siting Nature-based Solutions in Dehradun, India, with Sendai as an exploratory case.",
+      page: "events/20261015_JST_LOTUS/event.html",
+    },
+    {
       date: "2026-07-28",
       dateLabel: "2026.07.28",
       title: "Analysis of the Impact of Disasters Through Media Coverage — Report One Month After the Kumamoto Earthquake —",
@@ -21,7 +30,7 @@
       summary: "A local LLM turns news articles about the 2026 Kumamoto earthquake into geocoded, structured records and links them into causal chains, 83% of them mappable. Tracked over a month, this exposed late-surfacing secondary impacts: tourism losses, petty crime, and mounting strain on hospitals.",
       page: "events/20260728_Kumamoto_EQ/event2.html",
     },
-    {    
+    {
       date: "2026-07-28",
       dateLabel: "2026.07.28",
       title: "Multimodal Impact Analysis of the Mw6.8 Kumamoto Earthquake, Japan",

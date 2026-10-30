@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JST LOTUS Programme 採択課題 — 山間盆地における水文学的レジリエンスのためのGeoAIフレームワーク</title>
+<meta name="description" content="JST LOTUS Programme（ASPIRE型）に採択された日印共同研究。地理空間AI（GeoAI）と自然を活用した解決策（NbS）を組み合わせ、インド・デラドゥンと仙台を対象にハザードマップをNbSの配置計画へとつなげます。">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="../../assets/css/style.css" rel="stylesheet">
+<style>
+  /* Colors follow the project slide deck (navy, teal, mint, green, amber). */
+  :root {
+    --lt-bg: #09283f;
+    --lt-surface: #10324b;
+    --lt-line: #234e6b;
+    --lt-ink: #eaf3f6;
+    --lt-ink-dim: #a6bfcb;
+    --lt-accent: #85c7cf;
+    --lt-teal: #128fa4;
+    --lt-green: #309671;
+    --lt-amber: #f3b55c;
+    --lt-measure: 72ch;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--lt-bg);
+    color: var(--lt-ink);
+    font-family: "Inter", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible { outline: 2px solid var(--lt-accent); outline-offset: 3px; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
+  .wrap a { color: var(--lt-accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .wrap a:hover { color: var(--lt-ink); }
+
+  /* ---------- Masthead ---------- */
+  .masthead { margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--lt-line); }
+  .topline { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap;
+             font-size: .88rem; margin-bottom: 1.6rem; }
+  .topline a { text-decoration: none; }
+  .program {
+    display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 .9rem;
+    font-size: .78rem; font-weight: 600; letter-spacing: .08em; color: var(--lt-accent);
+  }
+  .program::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--lt-amber); }
+  .masthead h1 { margin: 0; font-size: 1.75rem; line-height: 1.4; font-weight: 700; letter-spacing: .005em;
+                 max-width: 32em; color: var(--lt-ink); }
+  .masthead h1, .slide-head h2 { word-break: auto-phrase; }
+  .nb { white-space: nowrap; }
+  .masthead .lede { margin: 1.1rem 0 0; max-width: var(--lt-measure); font-size: 1rem; color: var(--lt-ink); }
+
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0 0; }
+  .fact { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 8px; padding: .9rem 1.1rem; }
+  .fact dt { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lt-ink-dim); }
+  .fact dd { margin: .2rem 0 0; font-size: .95rem; font-weight: 500; line-height: 1.5; }
+
+  .team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .person { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 8px; padding: 1rem 1.1rem 1.05rem; }
+  .person .role { margin: 0; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lt-accent); }
+  .person .name { margin: .3rem 0 .15rem; font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+  .person .name a { color: var(--lt-ink); }
+  .person .affil { margin: 0; font-size: .84rem; line-height: 1.6; color: var(--lt-ink-dim); }
+
+  .meta { margin: 1.6rem 0 0; font-size: .86rem; line-height: 1.85; color: var(--lt-ink-dim); }
+  .hint { margin: .9rem 0 0; font-size: .78rem; color: var(--lt-ink-dim); opacity: .9; max-width: var(--lt-measure); }
+
+  /* ---------- Slides ---------- */
+  .slide { margin: 0 0 4.5rem; }
+  .slide-head { display: flex; align-items: baseline; gap: .75rem; margin-bottom: .8rem; }
+  .slide-num {
+    font-variant-numeric: tabular-nums; font-size: .78rem; color: var(--lt-ink-dim);
+    border: 1px solid var(--lt-line); border-radius: 999px; padding: .1rem .6rem; flex: none;
+  }
+  .slide-head h2 { margin: 0; font-size: 1.05rem; font-weight: 600; line-height: 1.5; color: var(--lt-ink); }
+  .stage { margin: 0; background: #fff; border-radius: 6px; overflow: hidden;
+           box-shadow: 0 18px 40px -22px #000, 0 0 0 1px #ffffff14; }
+  .stage img { display: block; width: 100%; height: auto; }
+
+  .notes { margin-top: .7rem; border-top: 1px solid var(--lt-line); }
+  .notes summary {
+    cursor: pointer; padding: .55rem .2rem; font-size: .8rem; color: var(--lt-ink-dim);
+    list-style: none; display: flex; align-items: center; gap: .45rem;
+  }
+  .notes summary::-webkit-details-marker { display: none; }
+  .notes summary::before { content: "+"; font-size: .85rem; opacity: .8; }
+  .notes[open] summary::before { content: "\2013"; }
+  .notes summary:hover { color: var(--lt-ink); }
+  .notes-body { padding: .2rem 0 1rem 1rem; margin-left: .35rem; max-width: var(--lt-measure);
+                border-left: 2px solid var(--lt-teal); }
+  .notes-body p, .notes-body li { font-size: .9rem; color: #d3e2e8; }
+  .notes-body p { margin: 0 0 .6rem; }
+  .notes-body ul { margin: 0 0 .6rem; padding-left: 1.2rem; }
+  .notes-body li { margin-bottom: .3rem; }
+  .notes-body strong { color: var(--lt-ink); font-weight: 600; }
+
+  .ack { margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--lt-line);
+         font-size: .84rem; color: var(--lt-ink-dim); max-width: var(--lt-measure); }
+
+  @media (max-width: 900px) {
+    .facts, .team { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .wrap { padding: 2rem 1rem 4rem; }
+    .masthead h1 { font-size: 1.3rem; }
+  }
+
+  @media print {
+    .navbar, .site-footer, .topline, .hint { display: none !important; }
+    body { background: #fff; color: #000; }
+    .wrap { padding: 0; max-width: none; }
+    .masthead, .ack { border-color: #ccc; }
+    .masthead h1, .masthead .lede, .person .name a, .fact dd, .slide-head h2 { color: #000; }
+    .fact, .person { background: #fff; border-color: #ccc; }
+    .program, .person .role, .meta, .fact dt, .person .affil, .ack { color: #333; }
+    .slide { margin: 0 0 .4cm; break-inside: avoid; page-break-after: always; }
+    .stage { box-shadow: none; border: 1px solid #ccc; }
+    .notes { display: none; }
+  }
+</style>
+</head>
+<body data-page="events" data-base="../../">
+
+<div id="site-header"></div>
+
+<main class="wrap">
+  <header class="masthead">
+    <div class="topline">
+      <a class="event-back" href="../../events-jp.html">&larr; 活動報告</a>
+      <a href="event.html" lang="en" hreflang="en">English</a>
+    </div>
+
+    <p class="program">JST LOTUS Programme・ASPIRE型・2026年度採択</p>
+    <h1>山間盆地における水文学的レジリエンスのための<span class="nb">GeoAIフレームワーク：</span>AIと自然を活用した解決策（NbS）の統合</h1>
+    <p class="lede">当研究室の提案課題が、科学技術振興機構（JST）の2026年度 LOTUS Programme（ASPIRE型）に採択されました。インド工科大学ルールキー校（IIT Roorkee）博士課程の Kshitiz Agarwal 氏を招へい研究者として迎え、10か月間にわたって共同研究を行います。本研究では、地理空間AI（GeoAI）と自然を活用した解決策（NbS）を組み合わせ、ハザードマップを「どこにNbSを導入すべきか」という具体的な計画へとつなげる枠組みを構築します。主な対象はインド・ヒマラヤ山麓の盆地都市デラドゥンで、沿岸都市・仙台を探索的な事例として扱います。</p>
+
+    <dl class="facts">
+      <div class="fact"><dt>事業</dt><dd>JST LOTUS Programme（ASPIRE型）</dd></div>
+      <div class="fact"><dt>研究期間</dt><dd>2026年10月～2028年3月</dd></div>
+      <div class="fact"><dt>招へい期間（災害研での滞在）</dt><dd>2027年2月～12月</dd></div>
+    </dl>
+
+    <div class="team">
+      <div class="person">
+        <p class="role">日本側研究代表者</p>
+        <p class="name"><a href="https://brunoadriano.com/" target="_blank" rel="noopener">アドリアノ・ブルーノ</a></p>
+        <p class="affil">准教授<br>東北大学 災害科学国際研究所<br>災害ジオインフォマティクス研究分野（ReGiD）</p>
+      </div>
+      <div class="person">
+        <p class="role">インド側研究代表者</p>
+        <p class="name">Mahua Mukherjee</p>
+        <p class="affil">教授<br>インド工科大学ルールキー校<br>建築・計画学科</p>
+      </div>
+      <div class="person">
+        <p class="role">招へい研究者</p>
+        <p class="name">Kshitiz Agarwal</p>
+        <p class="affil">博士課程学生<br>インド工科大学ルールキー校<br>建築・計画学科</p>
+      </div>
+    </div>
+
+    <p class="meta">東北大学 災害科学国際研究所 災害ジオインフォマティクス研究分野<br>連絡先：<a href="https://brunoadriano.com/" target="_blank" rel="noopener">アドリアノ・ブルーノ</a>（<a href="mailto:bruno.adriano@tohoku.ac.jp">bruno.adriano@tohoku.ac.jp</a>）</p>
+    <p class="hint">← → キーでスライドを移動、N キーですべての解説を開閉できます。全4枚。スライドは英語です。各スライドの解説は、スライドの内容をもとに作成しています。</p>
+  </header>
+
+  <section class="slide" id="s1" data-n="1">
+    <header class="slide-head">
+      <span class="slide-num">1</span>
+      <h2>プロジェクト概要</h2>
+    </header>
+    <figure class="stage">
+      <img src="slide-1.jpg" alt="タイトルスライド：山間盆地における水文学的レジリエンスのためのGeoAIフレームワーク（JST LOTUS Programme）と、東北大学・インド工科大学ルールキー校の研究チーム" width="1920" height="1080">
+    </figure>
+    <details class="notes"><summary>スライドの解説</summary><div class="notes-body">
+      <p>科学技術振興機構（JST）の LOTUS Programme（ASPIRE型）による日印共同研究です。地理空間AIと自然を活用した解決策（NbS）を組み合わせ、ハザードマップの作成にとどまらず、自然の力を活かした都市のレジリエンス向上を具体的な計画へとつなげることを目指します。</p>
+      <p>研究チーム：<a href="https://brunoadriano.com/" target="_blank" rel="noopener">アドリアノ・ブルーノ</a>（日本側研究代表者、東北大学 災害科学国際研究所）、Mahua Mukherjee（インド側研究代表者、インド工科大学ルールキー校）、Kshitiz Agarwal（招へい研究者、インド工科大学ルールキー校）。</p>
+    </div></details>
+  </section>
+
+  <section class="slide" id="s2" data-n="2">
+    <header class="slide-head">
+      <span class="slide-num">2</span>
+      <h2>研究の背景 — 二つのハザード、一つの計画課題</h2>
+    </header>
+    <figure class="stage">
+      <img src="slide-2.jpg" alt="研究の背景：ヒマラヤの盆地都市デラドゥンと沿岸都市・仙台、および共通の研究課題" loading="lazy" width="1920" height="1080">
+    </figure>
+    <details class="notes"><summary>スライドの解説</summary><div class="notes-body">
+      <p>一つの空間計画の枠組みを、それぞれ異なるハザードを抱える二つの都市に適用します。</p>
+      <ul>
+        <li><strong>デラドゥン（インド）</strong> — ヒマラヤ山麓の盆地都市です。モンスーン期の洪水と乾季の水不足に直面しており、排水路や空地への開発圧力も高まっています。ここでのNbSは、洪水の緩衝帯、地下水の涵養、河川回廊の再生に役立ちます。</li>
+        <li><strong>仙台（日本）</strong> — 津波の危険にさらされる沿岸都市です。2011年の東日本大震災からの復興の経験は、津波に強いまちづくり、安全なオープンスペースの確保、復興のあり方など、レジリエントな空間計画に多くの教訓を与えます。仙台は探索的な事例として扱います。</li>
+      </ul>
+      <p><strong>共通の研究課題：</strong>実現可能で効果的なNbSを導入できる、市街地化していない土地はどこにあるのか。</p>
+    </div></details>
+  </section>
+
+  <section class="slide" id="s3" data-n="3">
+    <header class="slide-head">
+      <span class="slide-num">3</span>
+      <h2>研究の枠組み — 五つの段階</h2>
+    </header>
+    <figure class="stage">
+      <img src="slide-3.jpg" alt="研究の枠組み：データ入力、ハザードと都市成長、地域をまたぐAI、空間最適化、計画への成果の五段階" loading="lazy" width="1920" height="1080">
+    </figure>
+    <details class="notes"><summary>スライドの解説</summary><div class="notes-body">
+      <p>多様な地理空間データから、実際の対策につながる計画判断までを、五つの段階で結びます。</p>
+      <ul>
+        <li><strong>データ入力</strong> — リモートセンシング、数値標高モデル（DEM）、排水網、都市の各種空間データ、NbSの類型。</li>
+        <li><strong>ハザードと都市成長</strong> — 2050年までの都市成長の予測と、洪水・津波のシナリオ解析。</li>
+        <li><strong>地域をまたぐAI</strong> — データが豊富な日本で学習したモデルを、転移学習によってデータの乏しいヒマラヤ地域に適用します。</li>
+        <li><strong>空間最適化</strong> — 多基準意思決定分析（MCDM）と実現可能性の基準を用いて、NbSやブルー・グリーンインフラ（BGI）の候補地に優先順位を付けます。</li>
+        <li><strong>計画への成果</strong> — 候補地マップ、対策の選択肢、適地評価マトリクス。</li>
+      </ul>
+      <p>この枠組みをデラドゥン（洪水・水ストレス）と仙台（津波リスク）で検証し、レジリエンスを高める都市計画に役立てます。</p>
+    </div></details>
+  </section>
+
+  <section class="slide" id="s4" data-n="4">
+    <header class="slide-head">
+      <span class="slide-num">4</span>
+      <h2>研究計画 — GeoAIによる予測からNbSの配置へ</h2>
+    </header>
+    <figure class="stage">
+      <img src="slide-4.jpg" alt="研究計画：三つの研究目標、10か月間の滞在スケジュール、期待される成果" loading="lazy" width="1920" height="1080">
+    </figure>
+    <details class="notes"><summary>スライドの解説</summary><div class="notes-body">
+      <p><strong>研究目標</strong></p>
+      <ul>
+        <li><strong>都市成長と候補地のマッピング</strong> — 2050年までの土地利用の変化をモデル化し、NbSを導入できる市街地化していない土地（opportunity windows）を特定します。</li>
+        <li><strong>動的なハザード予測</strong> — 地理空間情報とAIを活用した手法により、モンスーン期の洪水と津波による浸水をシミュレーションします。</li>
+        <li><strong>NbS・BGIの空間最適化</strong> — MCDMを用いて、流出の抑制、地下水涵養の可能性、技術的な適性の観点から、実現可能な候補地に優先順位を付けます。</li>
+      </ul>
+      <p><strong>災害研での10か月間の滞在（2027年2月～12月）</strong></p>
+      <ul>
+        <li>1～4か月目：多様な衛星データと転移学習を用いた、デラドゥンの都市成長とハザードのマッピング</li>
+        <li>5～6か月目：客観的な統計的重み付けによるNbS最適化マトリクスの構築</li>
+        <li>7～10か月目：NbS配置の空間シミュレーション、NbSロードマップの作成、仙台のデータを用いた探索的なモデル化、論文執筆</li>
+      </ul>
+      <p><strong>期待される成果：</strong>対策の候補地を示すマップ、実現可能性を踏まえて候補地に優先順位を付けたNbS・BGI優先度マトリクス、そして研究論文に裏付けられた都市レジリエンスの枠組み。</p>
+    </div></details>
+  </section>
+
+  <p class="ack">本研究は、科学技術振興機構（JST）LOTUS Programme（ASPIRE型）の支援を受けて実施しています。</p>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/site-jp.js"></script>
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var current = 0;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) current = slides.indexOf(e.target);
+    });
+  }, { rootMargin: "-10% 0px -80% 0px", threshold: 0 });
+  slides.forEach(function (s) { io.observe(s); });
+
+  function go(d) {
+    var i = Math.min(slides.length - 1, Math.max(0, current + d));
+    slides[i].scrollIntoView({ behavior: "smooth", block: "start" });
+    current = i;
+  }
+
+  var open = false;
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA") return;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "j") { e.preventDefault(); go(1); }
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "k") { e.preventDefault(); go(-1); }
+    else if (e.key === "n" || e.key === "N") {
+      open = !open;
+      document.querySelectorAll("details.notes").forEach(function (d) { d.open = open; });
+    }
+  });
+})();
+</script>
+</body>
+</html>
