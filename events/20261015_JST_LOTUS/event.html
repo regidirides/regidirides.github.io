@@ -1,287 +1,644 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JST LOTUS Programme — GeoAI Framework for Hydrological Resilience in Intermontane Basins</title>
-<meta name="description" content="New India–Japan research project selected for the JST LOTUS Programme (ASPIRE type): a GeoAI framework that links hazard mapping with Nature-based Solutions in Dehradun, India, and Sendai, Japan.">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="../../assets/css/style.css" rel="stylesheet">
-<style>
-  /* Colors follow the project slide deck (navy, teal, mint, green, amber). */
-  :root {
-    --lt-bg: #09283f;
-    --lt-surface: #10324b;
-    --lt-line: #234e6b;
-    --lt-ink: #eaf3f6;
-    --lt-ink-dim: #a6bfcb;
-    --lt-accent: #85c7cf;
-    --lt-teal: #128fa4;
-    --lt-green: #309671;
-    --lt-amber: #f3b55c;
-    --lt-measure: 72ch;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body {
-    margin: 0;
-    background: var(--lt-bg);
-    color: var(--lt-ink);
-    font-family: "Inter", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-  }
-  :focus-visible { outline: 2px solid var(--lt-accent); outline-offset: 3px; }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JST LOTUS Programme — GeoAI Framework for Hydrological Resilience in Intermontane Basins</title>
+  <meta name="description"
+    content="New India–Japan research project selected for the JST LOTUS Programme (ASPIRE type): a GeoAI framework that links hazard mapping with Nature-based Solutions in Dehradun, India, and Sendai, Japan.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="../../assets/css/style.css" rel="stylesheet">
+  <style>
+    /* Colors follow the project slide deck (navy, teal, mint, green, amber). */
+    :root {
+      --lt-bg: #09283f;
+      --lt-surface: #10324b;
+      --lt-line: #234e6b;
+      --lt-ink: #eaf3f6;
+      --lt-ink-dim: #a6bfcb;
+      --lt-accent: #85c7cf;
+      --lt-teal: #128fa4;
+      --lt-green: #309671;
+      --lt-amber: #f3b55c;
+      --lt-measure: 72ch;
+    }
 
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 3.5rem 2rem 6rem; }
-  .wrap a { color: var(--lt-accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  .wrap a:hover { color: var(--lt-ink); }
+    * {
+      box-sizing: border-box;
+    }
 
-  /* ---------- Masthead ---------- */
-  .masthead { margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--lt-line); }
-  .topline { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap;
-             font-size: .88rem; margin-bottom: 1.6rem; }
-  .topline a { text-decoration: none; }
-  .program {
-    display: inline-flex; align-items: center; gap: .5rem; margin: 0 0 .9rem;
-    font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lt-accent);
-  }
-  .program::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--lt-amber); }
-  .masthead h1 { margin: 0; font-size: 1.75rem; line-height: 1.4; font-weight: 700; letter-spacing: .005em;
-                 max-width: 40ch; color: var(--lt-ink); }
-  .masthead .lede { margin: 1.1rem 0 0; max-width: var(--lt-measure); font-size: 1rem; color: var(--lt-ink); }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5.5rem;
+    }
 
-  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0 0; }
-  .fact { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 8px; padding: .9rem 1.1rem; }
-  .fact dt { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lt-ink-dim); }
-  .fact dd { margin: .2rem 0 0; font-size: .95rem; font-weight: 500; line-height: 1.5; }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
 
-  .team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
-  .person { background: var(--lt-surface); border: 1px solid var(--lt-line); border-radius: 8px; padding: 1rem 1.1rem 1.05rem; }
-  .person .role { margin: 0; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--lt-accent); }
-  .person .name { margin: .3rem 0 .15rem; font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
-  .person .name a { color: var(--lt-ink); }
-  .person .affil { margin: 0; font-size: .84rem; line-height: 1.6; color: var(--lt-ink-dim); }
+    body {
+      margin: 0;
+      background: var(--lt-bg);
+      color: var(--lt-ink);
+      font-family: "Inter", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .meta { margin: 1.6rem 0 0; font-size: .86rem; line-height: 1.85; color: var(--lt-ink-dim); }
-  .hint { margin: .9rem 0 0; font-size: .78rem; color: var(--lt-ink-dim); opacity: .9; max-width: var(--lt-measure); }
+    :focus-visible {
+      outline: 2px solid var(--lt-accent);
+      outline-offset: 3px;
+    }
 
-  /* ---------- Slides ---------- */
-  .slide { margin: 0 0 4.5rem; }
-  .slide-head { display: flex; align-items: baseline; gap: .75rem; margin-bottom: .8rem; }
-  .slide-num {
-    font-variant-numeric: tabular-nums; font-size: .78rem; color: var(--lt-ink-dim);
-    border: 1px solid var(--lt-line); border-radius: 999px; padding: .1rem .6rem; flex: none;
-  }
-  .slide-head h2 { margin: 0; font-size: 1.05rem; font-weight: 600; line-height: 1.5; color: var(--lt-ink); }
-  .stage { margin: 0; background: #fff; border-radius: 6px; overflow: hidden;
-           box-shadow: 0 18px 40px -22px #000, 0 0 0 1px #ffffff14; }
-  .stage img { display: block; width: 100%; height: auto; }
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 6rem;
+    }
 
-  .notes { margin-top: .7rem; border-top: 1px solid var(--lt-line); }
-  .notes summary {
-    cursor: pointer; padding: .55rem .2rem; font-size: .8rem; color: var(--lt-ink-dim);
-    list-style: none; display: flex; align-items: center; gap: .45rem;
-  }
-  .notes summary::-webkit-details-marker { display: none; }
-  .notes summary::before { content: "+"; font-size: .85rem; opacity: .8; }
-  .notes[open] summary::before { content: "\2013"; }
-  .notes summary:hover { color: var(--lt-ink); }
-  .notes-body { padding: .2rem 0 1rem 1rem; margin-left: .35rem; max-width: var(--lt-measure);
-                border-left: 2px solid var(--lt-teal); }
-  .notes-body p, .notes-body li { font-size: .9rem; color: #d3e2e8; }
-  .notes-body p { margin: 0 0 .6rem; }
-  .notes-body ul { margin: 0 0 .6rem; padding-left: 1.2rem; }
-  .notes-body li { margin-bottom: .3rem; }
-  .notes-body strong { color: var(--lt-ink); font-weight: 600; }
+    .wrap a {
+      color: var(--lt-accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
 
-  .ack { margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--lt-line);
-         font-size: .84rem; color: var(--lt-ink-dim); max-width: var(--lt-measure); }
+    .wrap a:hover {
+      color: var(--lt-ink);
+    }
 
-  @media (max-width: 900px) {
-    .facts, .team { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 700px) {
-    .wrap { padding: 2rem 1rem 4rem; }
-    .masthead h1 { font-size: 1.3rem; }
-  }
+    /* ---------- Masthead ---------- */
+    .masthead {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--lt-line);
+    }
 
-  @media print {
-    .navbar, .site-footer, .topline, .hint { display: none !important; }
-    body { background: #fff; color: #000; }
-    .wrap { padding: 0; max-width: none; }
-    .masthead, .ack { border-color: #ccc; }
-    .masthead h1, .masthead .lede, .person .name a, .fact dd, .slide-head h2 { color: #000; }
-    .fact, .person { background: #fff; border-color: #ccc; }
-    .program, .person .role, .meta, .fact dt, .person .affil, .ack { color: #333; }
-    .slide { margin: 0 0 .4cm; break-inside: avoid; page-break-after: always; }
-    .stage { box-shadow: none; border: 1px solid #ccc; }
-    .notes { display: none; }
-  }
-</style>
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: .88rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .topline a {
+      text-decoration: none;
+    }
+
+    .program {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin: 0 0 .9rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--lt-accent);
+    }
+
+    .program::before {
+      content: "";
+      width: .5rem;
+      height: .5rem;
+      border-radius: 50%;
+      background: var(--lt-amber);
+    }
+
+    .masthead h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      line-height: 1.4;
+      font-weight: 700;
+      letter-spacing: .005em;
+      max-width: 40ch;
+      color: var(--lt-ink);
+    }
+
+    .masthead .lede {
+      margin: 1.1rem 0 0;
+      max-width: var(--lt-measure);
+      font-size: 1rem;
+      color: var(--lt-ink);
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 2rem 0 0;
+    }
+
+    .fact {
+      background: var(--lt-surface);
+      border: 1px solid var(--lt-line);
+      border-radius: 8px;
+      padding: .9rem 1.1rem;
+    }
+
+    .fact dt {
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--lt-ink-dim);
+    }
+
+    .fact dd {
+      margin: .2rem 0 0;
+      font-size: .95rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .person {
+      background: var(--lt-surface);
+      border: 1px solid var(--lt-line);
+      border-radius: 8px;
+      padding: 1rem 1.1rem 1.05rem;
+    }
+
+    .person .role {
+      margin: 0;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--lt-accent);
+    }
+
+    .person .name {
+      margin: .3rem 0 .15rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .person .name a {
+      color: var(--lt-ink);
+    }
+
+    .person .affil {
+      margin: 0;
+      font-size: .84rem;
+      line-height: 1.6;
+      color: var(--lt-ink-dim);
+    }
+
+    .meta {
+      margin: 1.6rem 0 0;
+      font-size: .86rem;
+      line-height: 1.85;
+      color: var(--lt-ink-dim);
+    }
+
+    .hint {
+      margin: .9rem 0 0;
+      font-size: .78rem;
+      color: var(--lt-ink-dim);
+      opacity: .9;
+      max-width: var(--lt-measure);
+    }
+
+    /* ---------- Slides ---------- */
+    .slide {
+      margin: 0 0 4.5rem;
+    }
+
+    .slide-head {
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      margin-bottom: .8rem;
+    }
+
+    .slide-num {
+      font-variant-numeric: tabular-nums;
+      font-size: .78rem;
+      color: var(--lt-ink-dim);
+      border: 1px solid var(--lt-line);
+      border-radius: 999px;
+      padding: .1rem .6rem;
+      flex: none;
+    }
+
+    .slide-head h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--lt-ink);
+    }
+
+    .stage {
+      margin: 0;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px -22px #000, 0 0 0 1px #ffffff14;
+    }
+
+    .stage img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .notes {
+      margin-top: .7rem;
+      border-top: 1px solid var(--lt-line);
+    }
+
+    .notes summary {
+      cursor: pointer;
+      padding: .55rem .2rem;
+      font-size: .8rem;
+      color: var(--lt-ink-dim);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+
+    .notes summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .notes summary::before {
+      content: "+";
+      font-size: .85rem;
+      opacity: .8;
+    }
+
+    .notes[open] summary::before {
+      content: "\2013";
+    }
+
+    .notes summary:hover {
+      color: var(--lt-ink);
+    }
+
+    .notes-body {
+      padding: .2rem 0 1rem 1rem;
+      margin-left: .35rem;
+      max-width: var(--lt-measure);
+      border-left: 2px solid var(--lt-teal);
+    }
+
+    .notes-body p,
+    .notes-body li {
+      font-size: .9rem;
+      color: #d3e2e8;
+    }
+
+    .notes-body p {
+      margin: 0 0 .6rem;
+    }
+
+    .notes-body ul {
+      margin: 0 0 .6rem;
+      padding-left: 1.2rem;
+    }
+
+    .notes-body li {
+      margin-bottom: .3rem;
+    }
+
+    .notes-body strong {
+      color: var(--lt-ink);
+      font-weight: 600;
+    }
+
+    .ack {
+      margin-top: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--lt-line);
+      font-size: .84rem;
+      color: var(--lt-ink-dim);
+      max-width: var(--lt-measure);
+    }
+
+    @media (max-width: 900px) {
+
+      .facts,
+      .team {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .wrap {
+        padding: 2rem 1rem 4rem;
+      }
+
+      .masthead h1 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media print {
+
+      .navbar,
+      .site-footer,
+      .topline,
+      .hint {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .wrap {
+        padding: 0;
+        max-width: none;
+      }
+
+      .masthead,
+      .ack {
+        border-color: #ccc;
+      }
+
+      .masthead h1,
+      .masthead .lede,
+      .person .name a,
+      .fact dd,
+      .slide-head h2 {
+        color: #000;
+      }
+
+      .fact,
+      .person {
+        background: #fff;
+        border-color: #ccc;
+      }
+
+      .program,
+      .person .role,
+      .meta,
+      .fact dt,
+      .person .affil,
+      .ack {
+        color: #333;
+      }
+
+      .slide {
+        margin: 0 0 .4cm;
+        break-inside: avoid;
+        page-break-after: always;
+      }
+
+      .stage {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      .notes {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body data-page="events" data-base="../../">
 
-<div id="site-header"></div>
+  <div id="site-header"></div>
 
-<main class="wrap">
-  <header class="masthead">
-    <div class="topline">
-      <a class="event-back" href="../../events-en.html">&larr; Events</a>
-      <a href="event-jp.html" lang="ja" hreflang="ja">日本語</a>
-    </div>
-
-    <p class="program">JST LOTUS Programme · ASPIRE type · FY2026</p>
-    <h1>GeoAI Framework for Hydrological Resilience in Intermontane Basins: Integrating AI and NbS Solutions</h1>
-    <p class="lede">Our project has been selected for the FY2026 LOTUS Programme of the Japan Science and Technology Agency (JST). Kshitiz Agarwal, a PhD research scholar at the Indian Institute of Technology (IIT) Roorkee, will join our laboratory as an invited researcher for ten months. Combining geospatial AI (GeoAI) with Nature-based Solutions (NbS), the project builds a framework that turns hazard maps into actionable plans for where to place NbS, with Dehradun, a Himalayan basin city in India, as the main case and coastal Sendai as an exploratory one.</p>
-
-    <dl class="facts">
-      <div class="fact"><dt>Program</dt><dd>JST LOTUS Programme, ASPIRE type</dd></div>
-      <div class="fact"><dt>Research period</dt><dd>October 2026 – March 2028</dd></div>
-      <div class="fact"><dt>Research stay at IRIDeS</dt><dd>February – December 2027</dd></div>
-    </dl>
-
-    <div class="team">
-      <div class="person">
-        <p class="role">Japan-side Principal Investigator</p>
-        <p class="name"><a href="https://brunoadriano.com/" target="_blank" rel="noopener">Bruno Adriano</a></p>
-        <p class="affil">Associate Professor<br>Disaster Geoinformatics Lab. (ReGiD), IRIDeS<br>Tohoku University, Japan</p>
+  <main class="wrap">
+    <header class="masthead">
+      <div class="topline">
+        <a class="event-back" href="../../events-en.html">&larr; Events</a>
+        <a href="event-jp.html" lang="ja" hreflang="ja">日本語</a>
       </div>
-      <div class="person">
-        <p class="role">India-side Principal Investigator</p>
-        <p class="name">Mahua Mukherjee</p>
-        <p class="affil">Professor<br>Department of Architecture &amp; Planning<br>Indian Institute of Technology Roorkee, India</p>
+
+      <p class="program">JST LOTUS Programme · ASPIRE type · FY2026</p>
+      <h1>GeoAI Framework for Hydrological Resilience in Intermontane Basins: Integrating AI and NbS Solutions</h1>
+      <p class="lede">Our project has been selected for the FY2026 LOTUS Programme of the Japan Science and Technology
+        Agency (JST). Kshitiz Agarwal, a PhD research scholar at the Indian Institute of Technology (IIT) Roorkee, will
+        join our laboratory as an invited researcher for ten months. Combining geospatial AI (GeoAI) with Nature-based
+        Solutions (NbS), the project builds a framework that turns hazard maps into actionable plans for where to place
+        NbS, with Dehradun, a Himalayan basin city in India, as the main case and coastal Sendai as an exploratory one.
+      </p>
+
+      <dl class="facts">
+        <div class="fact">
+          <dt>Program</dt>
+          <dd>JST LOTUS Programme, ASPIRE type</dd>
+        </div>
+        <div class="fact">
+          <dt>Research period</dt>
+          <dd>October 2026 – March 2028</dd>
+        </div>
+        <div class="fact">
+          <dt>Research stay at IRIDeS</dt>
+          <dd>February – December 2027</dd>
+        </div>
+      </dl>
+
+      <div class="team">
+        <div class="person">
+          <p class="role">Japan-side Principal Investigator</p>
+          <p class="name"><a href="https://brunoadriano.com/" target="_blank" rel="noopener">Bruno Adriano</a></p>
+          <p class="affil">Associate Professor<br>Disaster Geoinformatics Lab. (ReGiD), IRIDeS<br>Tohoku University,
+            Japan</p>
+        </div>
+        <div class="person">
+          <p class="role">India-side Principal Investigator</p>
+          <p class="name">Mahua Mukherjee</p>
+          <p class="affil">Professor<br>Department of Architecture &amp; Planning<br>Indian Institute of Technology
+            Roorkee, India</p>
+        </div>
+        <div class="person">
+          <p class="role">Invited Researcher</p>
+          <p class="name">Kshitiz Agarwal</p>
+          <p class="affil">PhD Research Scholar<br>Department of Architecture &amp; Planning<br>Indian Institute of
+            Technology Roorkee, India</p>
+        </div>
       </div>
-      <div class="person">
-        <p class="role">Invited Researcher</p>
-        <p class="name">Kshitiz Agarwal</p>
-        <p class="affil">PhD Research Scholar<br>Department of Architecture &amp; Planning<br>Indian Institute of Technology Roorkee, India</p>
-      </div>
-    </div>
 
-    <p class="meta">Disaster Geoinformatics Laboratory, International Research Institute of Disaster Science, Tohoku University<br>Contact: <a href="https://brunoadriano.com/" target="_blank" rel="noopener">Bruno Adriano</a> (<a href="mailto:bruno.adriano@tohoku.ac.jp">bruno.adriano@tohoku.ac.jp</a>)</p>
-    <p class="hint">← → to move between slides, N to open or close all summaries. 4 slides. Summaries were written from the slide content.</p>
-  </header>
-
-  <section class="slide" id="s1" data-n="1">
-    <header class="slide-head">
-      <span class="slide-num">1</span>
-      <h2>Project overview</h2>
+      <p class="meta">Disaster Geoinformatics Laboratory, International Research Institute of Disaster Science, Tohoku
+        University<br>Contact: <a href="https://brunoadriano.com/" target="_blank" rel="noopener">Bruno Adriano</a></p>
+      <p class="hint">← → to move between slides, N to open or close all summaries. 4 slides. Summaries were written
+        from the slide content.</p>
     </header>
-    <figure class="stage">
-      <img src="slide-1.jpg" alt="Title slide: GeoAI Framework for Hydrological Resilience in Intermontane Basins, JST LOTUS Programme, with the project team from Tohoku University and IIT Roorkee" width="1920" height="1080">
-    </figure>
-    <details class="notes"><summary>Slide summary</summary><div class="notes-body">
-      <p>An India–Japan research collaboration under the JST LOTUS Programme (ASPIRE type). The project combines geospatial AI with Nature-based Solutions (NbS) to move from hazard maps to actionable, nature-based urban resilience.</p>
-      <p>The team: <a href="https://brunoadriano.com/" target="_blank" rel="noopener">Bruno Adriano</a> (Japan-side principal investigator, IRIDeS, Tohoku University), Mahua Mukherjee (India-side principal investigator, IIT Roorkee) and Kshitiz Agarwal (invited researcher, IIT Roorkee).</p>
-    </div></details>
-  </section>
 
-  <section class="slide" id="s2" data-n="2">
-    <header class="slide-head">
-      <span class="slide-num">2</span>
-      <h2>Research context — two hazard settings, one planning challenge</h2>
-    </header>
-    <figure class="stage">
-      <img src="slide-2.jpg" alt="Research context: Dehradun, a Himalayan basin city, and Sendai, a coastal city, with the shared research question" loading="lazy" width="1920" height="1080">
-    </figure>
-    <details class="notes"><summary>Slide summary</summary><div class="notes-body">
-      <p>The project adapts one spatial-planning framework to two cities while respecting the distinct hazards of each.</p>
-      <ul>
-        <li><strong>Dehradun, India</strong> — a Himalayan basin city facing monsoon-driven flooding and dry-season water scarcity, with growing pressure on drainage corridors and open land. Here NbS can act as flood buffers, support groundwater recharge and restore river corridors.</li>
-        <li><strong>Sendai, Japan</strong> — a coastal city exposed to tsunamis, whose reconstruction after the 2011 Great East Japan Earthquake offers lessons for resilient spatial planning: tsunami resilience, safe open space and recovery. Sendai is studied as an exploratory case.</li>
-      </ul>
-      <p><strong>Shared research question:</strong> where is non-built-up land available that can support feasible, effective Nature-based Solutions?</p>
-    </div></details>
-  </section>
+    <section class="slide" id="s1" data-n="1">
+      <header class="slide-head">
+        <span class="slide-num">1</span>
+        <h2>Project overview</h2>
+      </header>
+      <figure class="stage">
+        <img src="slide-1.jpg"
+          alt="Title slide: GeoAI Framework for Hydrological Resilience in Intermontane Basins, JST LOTUS Programme, with the project team from Tohoku University and IIT Roorkee"
+          width="1920" height="1080">
+      </figure>
+      <details class="notes">
+        <summary>Slide summary</summary>
+        <div class="notes-body">
+          <p>An India–Japan research collaboration under the JST LOTUS Programme (ASPIRE type). The project combines
+            geospatial AI with Nature-based Solutions (NbS) to move from hazard maps to actionable, nature-based urban
+            resilience.</p>
+          <p>The team: <a href="https://brunoadriano.com/" target="_blank" rel="noopener">Bruno Adriano</a> (Japan-side
+            principal investigator, IRIDeS, Tohoku University), Mahua Mukherjee (India-side principal investigator, IIT
+            Roorkee) and Kshitiz Agarwal (invited researcher, IIT Roorkee).</p>
+        </div>
+      </details>
+    </section>
 
-  <section class="slide" id="s3" data-n="3">
-    <header class="slide-head">
-      <span class="slide-num">3</span>
-      <h2>Research framework — five connected stages</h2>
-    </header>
-    <figure class="stage">
-      <img src="slide-3.jpg" alt="Research framework in five stages: data inputs, hazard and growth, cross-context AI, spatial optimization, planning outputs" loading="lazy" width="1920" height="1080">
-    </figure>
-    <details class="notes"><summary>Slide summary</summary><div class="notes-body">
-      <p>The framework moves from multi-source geospatial data to planning decisions that are ready for intervention.</p>
-      <ul>
-        <li><strong>Data inputs</strong> — remote sensing, digital elevation models (DEMs), drainage networks, urban layers and a catalog of NbS types.</li>
-        <li><strong>Hazard and growth</strong> — urban growth projected to 2050, and flood and tsunami scenario modeling.</li>
-        <li><strong>Cross-context AI</strong> — transfer learning adapts models trained on data-rich Japanese datasets to the data-scarce Himalayan setting.</li>
-        <li><strong>Spatial optimization</strong> — candidate sites for NbS and blue-green infrastructure (BGI) are ranked with multi-criteria decision-making (MCDM) and feasibility criteria.</li>
-        <li><strong>Planning outputs</strong> — opportunity maps, intervention options and a suitability matrix.</li>
-      </ul>
-      <p>The framework is tested in Dehradun (flooding and water stress) and Sendai (tsunami risk) to support resilience planning.</p>
-    </div></details>
-  </section>
+    <section class="slide" id="s2" data-n="2">
+      <header class="slide-head">
+        <span class="slide-num">2</span>
+        <h2>Research context — two hazard settings, one planning challenge</h2>
+      </header>
+      <figure class="stage">
+        <img src="slide-2.jpg"
+          alt="Research context: Dehradun, a Himalayan basin city, and Sendai, a coastal city, with the shared research question"
+          loading="lazy" width="1920" height="1080">
+      </figure>
+      <details class="notes">
+        <summary>Slide summary</summary>
+        <div class="notes-body">
+          <p>The project adapts one spatial-planning framework to two cities while respecting the distinct hazards of
+            each.</p>
+          <ul>
+            <li><strong>Dehradun, India</strong> — a Himalayan basin city facing monsoon-driven flooding and dry-season
+              water scarcity, with growing pressure on drainage corridors and open land. Here NbS can act as flood
+              buffers, support groundwater recharge and restore river corridors.</li>
+            <li><strong>Sendai, Japan</strong> — a coastal city exposed to tsunamis, whose reconstruction after the 2011
+              Great East Japan Earthquake offers lessons for resilient spatial planning: tsunami resilience, safe open
+              space and recovery. Sendai is studied as an exploratory case.</li>
+          </ul>
+          <p><strong>Shared research question:</strong> where is non-built-up land available that can support feasible,
+            effective Nature-based Solutions?</p>
+        </div>
+      </details>
+    </section>
 
-  <section class="slide" id="s4" data-n="4">
-    <header class="slide-head">
-      <span class="slide-num">4</span>
-      <h2>Research plan — from GeoAI prediction to NbS siting</h2>
-    </header>
-    <figure class="stage">
-      <img src="slide-4.jpg" alt="Research plan: three research objectives, the 10-month research stay schedule and the expected project outputs" loading="lazy" width="1920" height="1080">
-    </figure>
-    <details class="notes"><summary>Slide summary</summary><div class="notes-body">
-      <p><strong>Research objectives</strong></p>
-      <ul>
-        <li><strong>Urban growth and opportunity mapping</strong> — model land-use change to 2050 and locate non-built-up “opportunity windows” where NbS could be placed.</li>
-        <li><strong>Dynamic hazard forecasting</strong> — simulate monsoon flooding and tsunami inundation using geospatial data and AI-assisted methods.</li>
-        <li><strong>Spatial optimization for NbS and BGI</strong> — use MCDM to rank feasible sites by runoff reduction, groundwater recharge potential and technical suitability.</li>
-      </ul>
-      <p><strong>Ten-month research stay at IRIDeS (February–December 2027)</strong></p>
-      <ul>
-        <li>Months 1–4: urban growth and hazard mapping for Dehradun with multi-source satellite data and transfer learning.</li>
-        <li>Months 5–6: an NbS optimization matrix built with objective statistical weighting.</li>
-        <li>Months 7–10: spatial simulations for NbS siting, an NbS roadmap, exploratory modeling of the Sendai datasets, and manuscripts.</li>
-      </ul>
-      <p><strong>Expected outputs:</strong> opportunity maps of sites for possible intervention, an NbS/BGI priority matrix with feasibility-informed site rankings, and an urban resilience framework supported by research articles.</p>
-    </div></details>
-  </section>
+    <section class="slide" id="s3" data-n="3">
+      <header class="slide-head">
+        <span class="slide-num">3</span>
+        <h2>Research framework — five connected stages</h2>
+      </header>
+      <figure class="stage">
+        <img src="slide-3.jpg"
+          alt="Research framework in five stages: data inputs, hazard and growth, cross-context AI, spatial optimization, planning outputs"
+          loading="lazy" width="1920" height="1080">
+      </figure>
+      <details class="notes">
+        <summary>Slide summary</summary>
+        <div class="notes-body">
+          <p>The framework moves from multi-source geospatial data to planning decisions that are ready for
+            intervention.</p>
+          <ul>
+            <li><strong>Data inputs</strong> — remote sensing, digital elevation models (DEMs), drainage networks, urban
+              layers and a catalog of NbS types.</li>
+            <li><strong>Hazard and growth</strong> — urban growth projected to 2050, and flood and tsunami scenario
+              modeling.</li>
+            <li><strong>Cross-context AI</strong> — transfer learning adapts models trained on data-rich Japanese
+              datasets to the data-scarce Himalayan setting.</li>
+            <li><strong>Spatial optimization</strong> — candidate sites for NbS and blue-green infrastructure (BGI) are
+              ranked with multi-criteria decision-making (MCDM) and feasibility criteria.</li>
+            <li><strong>Planning outputs</strong> — opportunity maps, intervention options and a suitability matrix.
+            </li>
+          </ul>
+          <p>The framework is tested in Dehradun (flooding and water stress) and Sendai (tsunami risk) to support
+            resilience planning.</p>
+        </div>
+      </details>
+    </section>
 
-  <p class="ack">This research is supported by the Japan Science and Technology Agency (JST) through the LOTUS Programme (ASPIRE type).</p>
-</main>
+    <section class="slide" id="s4" data-n="4">
+      <header class="slide-head">
+        <span class="slide-num">4</span>
+        <h2>Research plan — from GeoAI prediction to NbS siting</h2>
+      </header>
+      <figure class="stage">
+        <img src="slide-4.jpg"
+          alt="Research plan: three research objectives, the 10-month research stay schedule and the expected project outputs"
+          loading="lazy" width="1920" height="1080">
+      </figure>
+      <details class="notes">
+        <summary>Slide summary</summary>
+        <div class="notes-body">
+          <p><strong>Research objectives</strong></p>
+          <ul>
+            <li><strong>Urban growth and opportunity mapping</strong> — model land-use change to 2050 and locate
+              non-built-up “opportunity windows” where NbS could be placed.</li>
+            <li><strong>Dynamic hazard forecasting</strong> — simulate monsoon flooding and tsunami inundation using
+              geospatial data and AI-assisted methods.</li>
+            <li><strong>Spatial optimization for NbS and BGI</strong> — use MCDM to rank feasible sites by runoff
+              reduction, groundwater recharge potential and technical suitability.</li>
+          </ul>
+          <p><strong>Ten-month research stay at IRIDeS (February–December 2027)</strong></p>
+          <ul>
+            <li>Months 1–4: urban growth and hazard mapping for Dehradun with multi-source satellite data and transfer
+              learning.</li>
+            <li>Months 5–6: an NbS optimization matrix built with objective statistical weighting.</li>
+            <li>Months 7–10: spatial simulations for NbS siting, an NbS roadmap, exploratory modeling of the Sendai
+              datasets, and manuscripts.</li>
+          </ul>
+          <p><strong>Expected outputs:</strong> opportunity maps of sites for possible intervention, an NbS/BGI priority
+            matrix with feasibility-informed site rankings, and an urban resilience framework supported by research
+            articles.</p>
+        </div>
+      </details>
+    </section>
 
-<div id="site-footer"></div>
+    <p class="ack">This research is supported by the Japan Science and Technology Agency (JST) through the LOTUS
+      Programme (ASPIRE type).</p>
+  </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../assets/js/site.js"></script>
-<script>
-(function () {
-  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
-  var current = 0;
+  <div id="site-footer"></div>
 
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) current = slides.indexOf(e.target);
-    });
-  }, { rootMargin: "-10% 0px -80% 0px", threshold: 0 });
-  slides.forEach(function (s) { io.observe(s); });
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/site.js"></script>
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+      var current = 0;
 
-  function go(d) {
-    var i = Math.min(slides.length - 1, Math.max(0, current + d));
-    slides[i].scrollIntoView({ behavior: "smooth", block: "start" });
-    current = i;
-  }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) current = slides.indexOf(e.target);
+        });
+      }, { rootMargin: "-10% 0px -80% 0px", threshold: 0 });
+      slides.forEach(function (s) { io.observe(s); });
 
-  var open = false;
-  document.addEventListener("keydown", function (e) {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
-    var t = e.target.tagName;
-    if (t === "INPUT" || t === "TEXTAREA") return;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "j") { e.preventDefault(); go(1); }
-    else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "k") { e.preventDefault(); go(-1); }
-    else if (e.key === "n" || e.key === "N") {
-      open = !open;
-      document.querySelectorAll("details.notes").forEach(function (d) { d.open = open; });
-    }
-  });
-})();
-</script>
+      function go(d) {
+        var i = Math.min(slides.length - 1, Math.max(0, current + d));
+        slides[i].scrollIntoView({ behavior: "smooth", block: "start" });
+        current = i;
+      }
+
+      var open = false;
+      document.addEventListener("keydown", function (e) {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        var t = e.target.tagName;
+        if (t === "INPUT" || t === "TEXTAREA") return;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "j") { e.preventDefault(); go(1); }
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "k") { e.preventDefault(); go(-1); }
+        else if (e.key === "n" || e.key === "N") {
+          open = !open;
+          document.querySelectorAll("details.notes").forEach(function (d) { d.open = open; });
+        }
+      });
+    })();
+  </script>
 </body>
+
 </html>
